@@ -5,7 +5,8 @@ using UnityEngine.AI;
 
 public class TestMovementBehavior : MonoBehaviour
 {
-    public GameObject goal;
+    public List<GameObject> Goals;
+    private int currentGoalIndex = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,7 +19,15 @@ public class TestMovementBehavior : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             NavMeshAgent agent = GetComponent<NavMeshAgent>();
-            agent.destination = goal.transform.position;
+            agent.destination = Goals[currentGoalIndex].transform.position;
+            if(currentGoalIndex == Goals.Count - 1)
+            {
+                currentGoalIndex = 0;
+            }
+            else
+            {
+                currentGoalIndex++;
+            }
         }
     }
 }
