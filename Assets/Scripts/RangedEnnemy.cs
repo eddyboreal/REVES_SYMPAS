@@ -6,6 +6,8 @@ using UnityEngine.AI;
 public class RangedEnnemy : Ennemy
 {
     // Start is called before the first frame update
+    public LineRenderer myLine;
+
     protected override void Awake()
     {
         base.Awake();
@@ -39,6 +41,18 @@ public class RangedEnnemy : Ennemy
         {
             agent.destination = player.transform.position;
             yield return new WaitForSeconds(RefreshPlayerPosition);
+        }
+    }
+
+    public void DrawLazer()
+    {
+        Ray ray = new Ray(transform.position, player.transform.position - transform.position);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit))
+        {
+            myLine.SetPosition(0, transform.position);
+            myLine.SetPosition(1, hit.point);
         }
     }
 }
