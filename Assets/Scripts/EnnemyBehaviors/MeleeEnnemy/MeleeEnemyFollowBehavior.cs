@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class MeleeEnemyFollowBehavior : EnnemyIdleBehavior
+public class MeleeEnemyFollowBehavior : EnemyFollowBehavior
 {
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         base.OnStateEnter(animator, stateInfo, layerIndex);
-        animator.GetComponent<MeleeEnnemy>().StartFollowing();
+        //animator.GetComponent<MeleeEnnemy>().StartFollowing();
     }
 
     //OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks

@@ -5,7 +5,6 @@ using UnityEngine.AI;
 
 public abstract class EnnemyIdleBehavior : StateMachineBehaviour
 {
-    RaycastHit hit;
 
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -23,13 +22,10 @@ public abstract class EnnemyIdleBehavior : StateMachineBehaviour
         {
             if(animator.GetComponent<Ennemy>().Distance <= animator.GetComponent<Ennemy>().StartRaycastingDistance)
             {
-                if (Physics.Raycast(animator.gameObject.transform.position, animator.GetComponent<Ennemy>().player.transform.position - animator.gameObject.transform.position, out hit))
+                if (animator.GetComponent<Ennemy>().PlayerOnSight())
                 {
-                    if (hit.collider.gameObject.CompareTag("Player"))
-                    {
-                        animator.SetTrigger("startFollowing");
-                    }
-                }
+                    animator.SetTrigger("startFollowing");
+                }     
             }
         }
     }

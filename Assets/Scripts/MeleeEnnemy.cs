@@ -30,8 +30,9 @@ public class MeleeEnnemy : Ennemy
         base.Die();
     }
 
-    public void StartFollowing()
+    public override void StartFollowing()
     {
+        base.StartFollowing();
         followingPlayer = true;
         StartCoroutine("FollowPlayer");
     }

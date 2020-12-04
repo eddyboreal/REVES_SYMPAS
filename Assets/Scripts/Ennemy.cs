@@ -9,6 +9,8 @@ public class Ennemy : MonoBehaviour
     public float Distance;
     public float StartRaycastingDistance = 5f;
 
+    RaycastHit hit;
+
     protected virtual void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
@@ -36,9 +38,22 @@ public class Ennemy : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private void OnDrawGizmos()
+    public virtual void StartFollowing()
     {
-        
+
+    }
+
+        public bool PlayerOnSight()
+    {
+        Debug.DrawRay(transform.position, GetComponent<Ennemy>().player.transform.position - transform.position);
+        if (Physics.Raycast(transform.position, player.transform.position - transform.position, out hit))
+        {
+            if (hit.collider.gameObject.CompareTag("Player"))
+            {
+                return true;
+            }   
+        }
+        return false;
     }
 
 }
