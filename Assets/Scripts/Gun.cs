@@ -24,7 +24,16 @@ public class Gun : MonoBehaviour
         if (Input.GetButton("Fire1"))
         {
             fire_cooldown_counter -= Time.deltaTime;
-            projectileEmitter.DrawLaser(FPSCam.transform.position + FPSCam.transform.forward * 0.75f, FPSCam.transform.forward, projectileEmitter.max_reflection_count);
+            if (is_allowed_to_fire)
+            {
+                projectileEmitter.DrawLaser(FPSCam.transform.position + FPSCam.transform.forward * 0.75f, 
+                    FPSCam.transform.forward, 
+                    projectileEmitter.max_reflection_count);
+            }
+            else
+            {
+                projectileEmitter.resetLaserLines();
+            }
             if (fire_cooldown_counter <= 0 && is_allowed_to_fire)
             {
                 Shoot();
