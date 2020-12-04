@@ -249,6 +249,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 10
   range: 100
+  fire_cooldown: 1
+  LaserEmitter: {fileID: 7212105594100343596}
   FPSCam: {fileID: 4872866961176015595}
 --- !u!1 &4872866962916058055
 GameObject:
@@ -401,11 +403,6 @@ PrefabInstance:
       propertyPath: LaserLine
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 4326356864887157307, guid: 500faae1f605c184ea5fa430e3b84da5,
-        type: 3}
-      propertyPath: max_reflection_count
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 4326356864887157308, guid: 500faae1f605c184ea5fa430e3b84da5,
         type: 3}
       propertyPath: m_Name
@@ -413,6 +410,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 500faae1f605c184ea5fa430e3b84da5, type: 3}
+--- !u!1 &7212105594100343596 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4326356864887157308, guid: 500faae1f605c184ea5fa430e3b84da5,
+    type: 3}
+  m_PrefabInstance: {fileID: 6349166685649277200}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7212105594100343594 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4326356864887157306, guid: 500faae1f605c184ea5fa430e3b84da5,
