@@ -13,6 +13,12 @@ public class RangedEnnemy : Ennemy
         base.Awake();
     }
 
+    protected void Start()
+    {
+        myLine.startWidth= 0.1f;
+        myLine.endWidth = 0.1f;
+    }
+
     protected override void Update()
     {
         base.Update();
@@ -51,8 +57,18 @@ public class RangedEnnemy : Ennemy
 
         if (Physics.Raycast(ray, out hit))
         {
+            myLine.startWidth += Time.deltaTime * 0.1f;
+            myLine.endWidth += Time.deltaTime * 0.1f;
             myLine.SetPosition(0, transform.position);
             myLine.SetPosition(1, hit.point);
         }
+    }
+
+    public void ResetLazer()
+    {
+        myLine.startWidth = 0.1f;
+        myLine.endWidth = 0.1f;
+        myLine.SetPosition(0, new Vector3(-500f, -500f, -500f));
+        myLine.SetPosition(1, new Vector3(-500f, -500f, -500f));
     }
 }
