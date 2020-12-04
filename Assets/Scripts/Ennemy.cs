@@ -2,19 +2,27 @@
 
 public class Ennemy : MonoBehaviour
 {
-    public float health = 50f;
+    public int health = 50;
+    public int damageDone = 10;
+    public GameObject player;
 
-    public void TakeDamage(float damage)
+    public void Awake()
+    {
+        player = GameObject.FindGameObjectWithTag("Player");
+    }
+
+    public virtual void TakeDamage(int damage)
     {
         health -= damage;
-        if (health == 0)
+        if (health <= 0)
         {
             Die();
         }
     }
 
-    void Die()
+    public virtual void Die()
     {
         Destroy(gameObject);
     }
+
 }
