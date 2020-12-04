@@ -14,6 +14,14 @@ public class ProjectileEmitter : MonoBehaviour
     public float laser_width = 0.1f;
     public float laser_max_length = 5f;
 
+    public GameObject[] TouchedGO;
+    /* 
+        TO DO:
+            store the last GameObjects touched by the laser
+            send them to the GUN
+            the gun has to retrieve them and be sure they are the last ones touched (also send the max_reflection_count in order to do that)
+    */
+
     void Start()
     {
         initLaserLines(LaserLines);
