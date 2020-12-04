@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class MeleeEnnemy : Ennemy
+public class RangedEnnemy : Ennemy
 {
-    public float SuicideDistance;
-
     // Start is called before the first frame update
     protected override void Awake()
     {

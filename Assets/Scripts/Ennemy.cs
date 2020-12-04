@@ -6,6 +6,8 @@ public class Ennemy : MonoBehaviour
     public int damageDone = 10;
     public GameObject player;
     public bool waitDetectionToFollow = false;
+    public bool followingPlayer = false;
+    public float RefreshPlayerPosition;
     public float Distance;
     public float StartRaycastingDistance = 5f;
 
@@ -40,7 +42,7 @@ public class Ennemy : MonoBehaviour
 
     public virtual void StartFollowing()
     {
-
+        followingPlayer = true;
     }
 
         public bool PlayerOnSight()
