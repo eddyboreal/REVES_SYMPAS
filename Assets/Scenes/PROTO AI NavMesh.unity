@@ -852,9 +852,10 @@ MonoBehaviour:
   health: 50
   damageDone: 10
   player: {fileID: 0}
+  waitDetectionToFollow: 0
   followingPlayer: 0
   RefreshPlayerPosition: 1
-  SuicideDistance: 3
+  SuicideDistance: 3.5
 --- !u!95 &561710815
 Animator:
   serializedVersion: 3

@@ -1,25 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
-public class MeleeEnemyFollowBehavior : EnnemyIdleBehavior
+public class MeleeEnnemyIdleBehavior : EnnemyIdleBehavior
 {
-    // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
+    //OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         base.OnStateEnter(animator, stateInfo, layerIndex);
-        animator.GetComponent<MeleeEnnemy>().StartFollowing();
     }
 
-    //OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
+    // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         base.OnStateUpdate(animator, stateInfo, layerIndex);
-        if (Vector3.Distance(animator.GetComponent<MeleeEnnemy>().player.transform.position, animator.gameObject.transform.position) < animator.GetComponent<MeleeEnnemy>().SuicideDistance)
-        {
-            animator.SetTrigger("onRange");
-        }
     }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state

@@ -3,22 +3,34 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class MeleeEnemyFollowBehavior : EnnemyIdleBehavior
+public abstract class EnnemyIdleBehavior : StateMachineBehaviour
 {
+    RaycastHit hit;
+
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        base.OnStateEnter(animator, stateInfo, layerIndex);
-        animator.GetComponent<MeleeEnnemy>().StartFollowing();
+        if (!animator.GetComponent<Ennemy>().waitDetectionToFollow)
+        {
+            animator.SetTrigger("startFollowing");
+        }
     }
 
     //OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        base.OnStateUpdate(animator, stateInfo, layerIndex);
-        if (Vector3.Distance(animator.GetComponent<MeleeEnnemy>().player.transform.position, animator.gameObject.transform.position) < animator.GetComponent<MeleeEnnemy>().SuicideDistance)
+        if (animator.GetComponent<Ennemy>().waitDetectionToFollow)
         {
-            animator.SetTrigger("onRange");
+            if(animator.GetComponent<Ennemy>().Distance <= animator.GetComponent<Ennemy>().StartRaycastingDistance)
+            {
+                if (Physics.Raycast(animator.gameObject.transform.position, animator.GetComponent<Ennemy>().player.transform.position - animator.gameObject.transform.position, out hit))
+                {
+                    if (hit.collider.gameObject.CompareTag("Player"))
+                    {
+                        animator.SetTrigger("startFollowing");
+                    }
+                }
+            }
         }
     }
 

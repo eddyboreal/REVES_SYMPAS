@@ -10,9 +10,14 @@ public class MeleeEnnemy : Ennemy
     public float SuicideDistance;
 
     // Start is called before the first frame update
-    void Awake()
+    protected override void Awake()
     {
         base.Awake();
+    }
+
+    protected override void Update()
+    {
+        base.Update();
     }
 
     public override void TakeDamage(int damage)

@@ -5,10 +5,21 @@ public class Ennemy : MonoBehaviour
     public int health = 50;
     public int damageDone = 10;
     public GameObject player;
+    public bool waitDetectionToFollow = false;
+    public float Distance;
+    public float StartRaycastingDistance = 5f;
 
-    public void Awake()
+    protected virtual void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+    }
+
+    protected virtual void Update()
+    {
+        if (waitDetectionToFollow)
+        {
+            Distance = Vector3.Distance(player.transform.position, transform.position);
+        }
     }
 
     public virtual void TakeDamage(int damage)
@@ -23,6 +34,11 @@ public class Ennemy : MonoBehaviour
     public virtual void Die()
     {
         Destroy(gameObject);
+    }
+
+    private void OnDrawGizmos()
+    {
+        
     }
 
 }
