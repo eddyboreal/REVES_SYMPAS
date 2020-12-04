@@ -5,7 +5,15 @@ public class Gun : MonoBehaviour
     public int damage = 10;
     public float range = 100f;
 
+    private LineRenderer laserLine;
+    private Transform gunEnd;
+
     public Camera FPSCam;
+
+    void Start()
+    {
+        laserLine = GetComponent<LineRenderer>();
+    }
     void Update()
     {
         if (Input.GetButtonDown("Fire1"))
