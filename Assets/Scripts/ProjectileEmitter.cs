@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class ProjectileEmitter : MonoBehaviour
 {
+    [SerializeField, Range(0, 5)]
     public int max_reflection_count = 5;
     public float max_step_distance = 200f;
     
@@ -17,15 +18,12 @@ public class ProjectileEmitter : MonoBehaviour
     {
         initLaserLines(LaserLines);
 
-        DrawLaser(this.transform.position + this.transform.forward * 0.75f, this.transform.forward, max_reflection_count);
+        //DrawLaser(this.transform.position + this.transform.forward * 0.75f, this.transform.forward, max_reflection_count);
     }
 
     void Update()
     {
-        if(Input.GetAxis("Mouse X") > 0 || Input.GetAxis("Mouse Y") > 0)
-        {
-            resetLaserLines(LaserLines);
-        }
+        //DrawLaser(this.transform.position + this.transform.forward * 0.75f, this.transform.forward, max_reflection_count);
     }
 
     void OnDrawGizmos()
@@ -67,7 +65,7 @@ public class ProjectileEmitter : MonoBehaviour
         DrawPredictedReflectionPattern(position, direction, remaining_reflections - 1);
     } 
 
-    private void DrawLaser(Vector3 position, Vector3 direction, int remaining_reflections)
+    public void DrawLaser(Vector3 position, Vector3 direction, int remaining_reflections)
     {
         if (remaining_reflections == 0)
         {
@@ -95,13 +93,14 @@ public class ProjectileEmitter : MonoBehaviour
         DrawLaser(position, direction, remaining_reflections - 1);
     }
 
-    private void resetLaserLines(LineRenderer[] _laserLines)
+    public void resetLaserLines()
     {
-        foreach(LineRenderer laserLine in _laserLines)
+        foreach(LineRenderer laserLine in LaserLines)
         {
-            laserLine.SetPosition(0, Vector3.zero * -46f);
-            laserLine.SetPosition(1, Vector3.zero * -46f);
+            laserLine.SetPosition(0, new Vector3(-500f, -500f, -500f));
+            laserLine.SetPosition(1, new Vector3(-500f, -500f, -500f));
         }
+        //DrawLaser(this.transform.position + this.transform.forward * 0.75f, this.transform.forward, max_reflection_count);
     }
 
     private void initLaserLines(LineRenderer[] laserLines)
@@ -119,6 +118,6 @@ public class ProjectileEmitter : MonoBehaviour
             LaserLines[i].gameObject.SetActive(false);
         }
 
-        resetLaserLines(laserLines);
+        resetLaserLines();
     }
 }
