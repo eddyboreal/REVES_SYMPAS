@@ -7,9 +7,8 @@ public class Gun : MonoBehaviour
 
     [SerializeField, Range(0, 1f)]
     private float fire_cooldown = 1f;
-    public float fire_cooldown_counter = 1f;
-
-    private bool fire_pressed = false;
+    private float fire_cooldown_counter = 1f;
+    private bool is_allowed_to_fire = true;
 
     public GameObject LaserEmitter;
     private ProjectileEmitter projectileEmitter;
@@ -22,37 +21,24 @@ public class Gun : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
-        {
-            if (fire_pressed)
-            {
-                fire_pressed = false;
-                //projectileEmitter.resetLaserLines();
-            }
-            else
-            {
-                fire_pressed = true;
-            }
-        }
-
-        if (fire_pressed)
+        if (Input.GetButton("Fire1"))
         {
             fire_cooldown_counter -= Time.deltaTime;
             projectileEmitter.DrawLaser(FPSCam.transform.position + FPSCam.transform.forward * 0.75f, FPSCam.transform.forward, projectileEmitter.max_reflection_count);
-            if(fire_cooldown_counter <= 0)
+            if (fire_cooldown_counter <= 0 && is_allowed_to_fire)
             {
-                Debug.Log("Shoot");
                 Shoot();
                 fire_cooldown_counter = fire_cooldown;
+                is_allowed_to_fire = false;
             }
         }
+        else
+        {
+            fire_cooldown_counter = fire_cooldown;
+            is_allowed_to_fire = true;
+            projectileEmitter.resetLaserLines();
+        }
     }
-
-    //OnFire
-        //lancer un compteur
-            //dessiner la trajectoire
-        //a la fin du compteur
-            //tirer
 
     //use raycast to shoot
     void Shoot()

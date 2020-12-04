@@ -432,7 +432,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4588925bc0ed874b9af1bf51d1ddc91, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  max_reflection_count: 5
+  max_reflection_count: 3
   max_step_distance: 200
   LaserLines: []
   laser_width: 0.1
