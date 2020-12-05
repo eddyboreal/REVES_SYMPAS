@@ -419,6 +419,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 4872866961176015594}
     m_Modifications:
+    - target: {fileID: 466169017178378984, guid: 500faae1f605c184ea5fa430e3b84da5,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: cb0a587e43d4a894fba39c3bd8864163, type: 2}
     - target: {fileID: 4326356864887157306, guid: 500faae1f605c184ea5fa430e3b84da5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -489,6 +494,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Laser Emitter
       objectReference: {fileID: 0}
+    - target: {fileID: 4445280572606642422, guid: 500faae1f605c184ea5fa430e3b84da5,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: cb0a587e43d4a894fba39c3bd8864163, type: 2}
+    - target: {fileID: 8417481827783077911, guid: 500faae1f605c184ea5fa430e3b84da5,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: cb0a587e43d4a894fba39c3bd8864163, type: 2}
+    - target: {fileID: 8963800573604057369, guid: 500faae1f605c184ea5fa430e3b84da5,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: cb0a587e43d4a894fba39c3bd8864163, type: 2}
+    - target: {fileID: 9136478143102790985, guid: 500faae1f605c184ea5fa430e3b84da5,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: cb0a587e43d4a894fba39c3bd8864163, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 500faae1f605c184ea5fa430e3b84da5, type: 3}
 --- !u!1 &7212105594100343596 stripped
