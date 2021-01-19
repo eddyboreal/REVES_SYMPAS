@@ -15,6 +15,8 @@ public class Gun : MonoBehaviour
 
     public Camera FPSCam;
 
+    public Transform GunEnd;
+
     void Start()
     {
         projectileEmitter = LaserEmitter.GetComponent<ProjectileEmitter>();
