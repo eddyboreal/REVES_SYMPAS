@@ -111,11 +111,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 10
   loadTime: 1.5
+  TileFadeInDuration: 0
+  TileFadeOutDuration: 0
   loadingGauge: {fileID: 0}
   fpsCam: {fileID: 8905300546012156589}
   Helper: {fileID: 0}
   reflections: 5
   maxLength: 300
+  FireStart: {fileID: 0}
 --- !u!1 &8905300546012156590
 GameObject:
   m_ObjectHideFlags: 0
@@ -483,6 +486,11 @@ PrefabInstance:
     - target: {fileID: 4826450088584990, guid: 119551172e2002344983c075ab97ef79, type: 3}
       propertyPath: m_LocalScale.z
       value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8269914060712132174, guid: 119551172e2002344983c075ab97ef79,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.37
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 119551172e2002344983c075ab97ef79, type: 3}
