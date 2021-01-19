@@ -113,6 +113,7 @@ MonoBehaviour:
   loadTime: 1.5
   loadingGauge: {fileID: 0}
   fpsCam: {fileID: 8905300546012156589}
+  Helper: {fileID: 0}
   reflections: 5
   maxLength: 300
 --- !u!1 &8905300546012156590
@@ -226,6 +227,7 @@ GameObject:
   - component: {fileID: 8905300546908222536}
   - component: {fileID: 8905300546908222537}
   - component: {fileID: 8905300546908222542}
+  - component: {fileID: 3912941077468265715}
   m_Layer: 0
   m_Name: MyPlayer
   m_TagString: Untagged
@@ -302,6 +304,22 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!208 &3912941077468265715
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8905300546908222538}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 0
+  m_Extents: {x: 0.5, y: 1, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &8905300547032331903
 GameObject:
   m_ObjectHideFlags: 0

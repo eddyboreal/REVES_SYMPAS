@@ -76,8 +76,8 @@ public class Blaster : MonoBehaviour
                 remainingLength -= Vector3.Distance(ray.origin, hit.point);
 
                 ray = new Ray(hit.point, Vector3.Reflect(ray.direction, hit.normal));
-
-                if (hit.collider.gameObject.CompareTag("Tile"))
+                
+                if (hit.collider.gameObject.CompareTag("Tile") && shoot)
                 {
                     Helper.FadeColor(
                         hit.collider.gameObject.GetComponent<MeshRenderer>().material, 
