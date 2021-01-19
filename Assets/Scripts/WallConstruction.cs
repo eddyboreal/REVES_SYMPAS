@@ -22,8 +22,7 @@ public class WallConstruction : MonoBehaviour
         
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Awake()
     {
         if (NumberOfXCubes + NumberOfYCubes != gameObject.transform.childCount && Application.isEditor)
         {
@@ -41,7 +40,7 @@ public class WallConstruction : MonoBehaviour
                 ySpawn = (cubeStep / 2);
                 for (int i = 0; i < NumberOfYCubes; i++)
                 {
-                    xSpawn = -(NumberOfXCubes * cubeStep / 2) + cubeScale/2;
+                    xSpawn = -(NumberOfXCubes * cubeStep / 2) + cubeScale / 2;
                     for (int j = 0; j < NumberOfXCubes; j++)
                     {
                         Vector3 b = new Vector3(xSpawn, ySpawn, zSpawn) + transform.position;
@@ -53,5 +52,11 @@ public class WallConstruction : MonoBehaviour
                 zSpawn += cubeStep;
             }
         }
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        
     }
 }

@@ -33,31 +33,25 @@ public class Helper : MonoBehaviour
         
     }   
 
-    public void FadeColor(Material mat, Color startColor, Color endColor, float fadeInDuration, float fadeOutDuration)
+    public void FadeColor(MeshRenderer meshRenderer, Color startColor, Color endColor, float fadeInDuration, float fadeOutDuration)
     {
-        StartCoroutine(FadeColorCoroutine(mat, startColor, endColor, fadeInDuration, fadeOutDuration));
+        StartCoroutine(FadeColorCoroutine(meshRenderer, startColor, endColor, fadeInDuration, fadeOutDuration));
     }
 
 
-    IEnumerator FadeColorCoroutine(Material mat,Color startColor, Color endColor, float fadeInDuration,float fadeOutDuration)
+    IEnumerator FadeColorCoroutine(MeshRenderer meshRenderer, Color startColor, Color endColor, float fadeInDuration,float fadeOutDuration)
     {
-        float t = 0;
-        while (t < 1)
+
+        for(float a =0; a <= fadeInDuration; a+= Time.deltaTime)
         {
-            t = Mathf.Lerp(t, 1f, (1 / fadeInDuration) * Time.deltaTime);
-            Color.Lerp(startColor, endColor, (1 / fadeInDuration) * Time.deltaTime);
-            yield return new WaitForSeconds(Time.deltaTime);
+            meshRenderer.material.color = Color.Lerp(startColor, endColor, a/fadeInDuration);
+            yield return null;
         }
 
-        t = 0;
-        if(fadeOutDuration != 0)
+        for (float b = 0; b <= fadeOutDuration; b += Time.deltaTime)
         {
-            while (t < 1)
-            {
-                t = Mathf.Lerp(t, 1f, (1 / fadeOutDuration) * Time.deltaTime);
-                Color.Lerp(endColor, startColor, (1 / fadeOutDuration) * Time.deltaTime);
-                yield return new WaitForSeconds(Time.deltaTime);
-            }
+            meshRenderer.material.color = Color.Lerp(endColor, startColor, b/fadeOutDuration);
+            yield return null;
         }
     }
 }

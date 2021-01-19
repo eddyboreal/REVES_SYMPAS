@@ -6,6 +6,9 @@ public class Blaster : MonoBehaviour
 {
     public int damage = 10;
     public float loadTime = 1.5f;
+    public float TileFadeInDuration;
+    public float TileFadeOutDuration;
+
 
     private float elapsedLoadingTime = 0f;
     public Slider loadingGauge = default;
@@ -56,6 +59,7 @@ public class Blaster : MonoBehaviour
         else
         {
             loadingGauge.value = 0f;
+            elapsedLoadingTime = 0f;
         }
     }
 
@@ -79,17 +83,19 @@ public class Blaster : MonoBehaviour
                 
                 if (hit.collider.gameObject.CompareTag("Tile") && shoot)
                 {
+                    
                     Helper.FadeColor(
-                        hit.collider.gameObject.GetComponent<MeshRenderer>().material, 
+                        hit.collider.gameObject.GetComponent<MeshRenderer>(), 
                         hit.collider.gameObject.GetComponent<MeshRenderer>().material.color, 
-                        Helper.colors.possibleColors[Random.Range(0, Helper.colors.possibleColors.Length - 1)], 
-                        1, 
-                        1
+                        Helper.colors.possibleColors[Random.Range(0, Helper.colors.possibleColors.Length - 1)],
+                        TileFadeInDuration,
+                        TileFadeOutDuration
                     );
                 }
 
                 if (hit.transform.GetComponent<Ennemy>() && shoot)
                 {
+
                     hit.transform.GetComponent<Ennemy>().TakeDamage(damage);
                 }
             }
