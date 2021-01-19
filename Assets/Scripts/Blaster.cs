@@ -10,6 +10,7 @@ public class Blaster : MonoBehaviour
     private float elapsedLoadingTime = 0f;
     public Slider loadingGauge = default;
     public Camera fpsCam;
+    public Helper Helper;
 
     //Laser Management
     public int reflections;
@@ -75,6 +76,17 @@ public class Blaster : MonoBehaviour
                 remainingLength -= Vector3.Distance(ray.origin, hit.point);
 
                 ray = new Ray(hit.point, Vector3.Reflect(ray.direction, hit.normal));
+
+                if (hit.collider.gameObject.CompareTag("Tile"))
+                {
+                    Helper.FadeColor(
+                        hit.collider.gameObject.GetComponent<MeshRenderer>().material, 
+                        hit.collider.gameObject.GetComponent<MeshRenderer>().material.color, 
+                        Helper.colors.possibleColors[Random.Range(0, Helper.colors.possibleColors.Length - 1)], 
+                        1, 
+                        1
+                    );
+                }
 
                 if (hit.transform.GetComponent<Ennemy>() && shoot)
                 {
