@@ -7,6 +7,15 @@ public class RangedEnnemy : Ennemy
 {
     // Start is called before the first frame update
     public LineRenderer myLine;
+    public float laserStartSize;
+    public float laserGrowthMultiplier;
+
+
+    public float laserDeGrowthValue;
+    public float timeToDegrowthCompletely;
+    public float timeToWaitBetweenEachFrameMultiplier;
+
+    private RaycastHit lastHit;
 
     protected override void Awake()
     {
@@ -15,8 +24,9 @@ public class RangedEnnemy : Ennemy
 
     protected void Start()
     {
-        myLine.startWidth= 0.1f;
-        myLine.endWidth = 0.1f;
+
+        myLine.startWidth= laserStartSize;
+        myLine.endWidth = laserStartSize;
     }
 
     protected override void Update()
@@ -57,8 +67,9 @@ public class RangedEnnemy : Ennemy
 
         if (Physics.Raycast(ray, out hit))
         {
-            myLine.startWidth += Time.deltaTime * 0.1f;
-            myLine.endWidth += Time.deltaTime * 0.1f;
+            lastHit = hit;
+            myLine.startWidth += Time.deltaTime * laserGrowthMultiplier;
+            myLine.endWidth += Time.deltaTime * laserGrowthMultiplier;
             myLine.SetPosition(0, transform.position);
             myLine.SetPosition(1, hit.point);
         }
@@ -66,8 +77,25 @@ public class RangedEnnemy : Ennemy
 
     public void ResetLazer()
     {
-        myLine.startWidth = 0.1f;
-        myLine.endWidth = 0.1f;
+        if (lastHit.collider.gameObject.CompareTag("Player"))
+        {
+            lastHit.collider.gameObject.GetComponent<Player>().TakeDamage(damageDone);
+        }
+        StartCoroutine(laserDegrowth());
+    }
+
+    IEnumerator laserDegrowth()
+    {
+        float counter = 0;
+        while (counter <= timeToDegrowthCompletely)
+        {
+            counter += Time.deltaTime * timeToWaitBetweenEachFrameMultiplier;
+            myLine.startWidth -= laserDeGrowthValue;
+            myLine.endWidth -= laserDeGrowthValue;
+            yield return new WaitForSeconds(Time.deltaTime * timeToWaitBetweenEachFrameMultiplier);
+        }
+        myLine.startWidth = laserStartSize;
+        myLine.endWidth = laserStartSize;
         myLine.SetPosition(0, new Vector3(-500f, -500f, -500f));
         myLine.SetPosition(1, new Vector3(-500f, -500f, -500f));
     }
