@@ -34,18 +34,18 @@ public class Ennemy : MonoBehaviour
         }
     }
 
-    public virtual void TakeDamage(int damage, Vector3 hitPosition)
+    public virtual void TakeDamage(int damage, Vector3 hitPosition, Vector3 rayOrigin)
     {
         health -= damage;
         if (health <= 0)
         {
-            Die(hitPosition);
+            Die(hitPosition, rayOrigin);
         }
     }
 
-    public virtual void Die(Vector3 hitPosition)
+    public virtual void Die(Vector3 hitPosition, Vector3 rayOrigin)
     {
-        Explode(hitPosition);
+        Explode(hitPosition, rayOrigin);
         //Destroy(gameObject);
     }
 
@@ -67,7 +67,7 @@ public class Ennemy : MonoBehaviour
         return false;
     }
 
-    private void Explode(Vector3 hitPosition)
+    private void Explode(Vector3 hitPosition, Vector3 rayOrigin)
     {
         gameObject.SetActive(false);
 
@@ -83,7 +83,7 @@ public class Ennemy : MonoBehaviour
             }
         }
 
-        Instantiate(cone, hitPosition, Quaternion.FromToRotation(-Vector3.forward, transform.position - hitPosition));
+        Instantiate(cone, hitPosition, Quaternion.FromToRotation(-Vector3.forward, (hitPosition +(hitPosition-rayOrigin) - hitPosition)));
         
         Collider[] colliders = Physics.OverlapSphere(hitPosition, 10);
 
