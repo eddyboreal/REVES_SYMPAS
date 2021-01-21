@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.AI;
 
 [ExecuteInEditMode]
 public class WallConstruction : MonoBehaviour
@@ -31,7 +32,7 @@ public class WallConstruction : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-#       if (UNITY_EDITOR)
+    /*#if (UNITY_EDITOR)
         if (EditorApplication.isPlaying) return;
         if (NumberOfXCubes + NumberOfYCubes != gameObject.transform.childCount && Application.isEditor)
         {
@@ -41,6 +42,7 @@ public class WallConstruction : MonoBehaviour
             }
 
             GameObject a = cube;
+            a.isStatic = true;
             a.transform.localScale = new Vector3(cubeScale, cubeScale, cubeScale);
 
             zSpawn = -(NumberOfZCubes * cubeStep / 2);
@@ -61,6 +63,6 @@ public class WallConstruction : MonoBehaviour
                 zSpawn += cubeStep;
             }
         }
-        #endif
+        #endif */
     }
 }
