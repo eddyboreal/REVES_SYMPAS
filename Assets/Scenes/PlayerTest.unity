@@ -452,7 +452,7 @@ PrefabInstance:
     - target: {fileID: 1327478130886040264, guid: a7c0047d2b0cf0f4aaa6dcec446ab296,
         type: 3}
       propertyPath: m_TagString
-      value: Ennemy
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 1327478130886040268, guid: a7c0047d2b0cf0f4aaa6dcec446ab296,
         type: 3}
@@ -733,6 +733,11 @@ MonoBehaviour:
   RefreshPlayerPosition: 0
   Distance: 0
   StartRaycastingDistance: 5
+  playerMat: {fileID: 0}
+  cubeScale: 0
+  hitForce: 0
+  explosionRadius: 0
+  UpwardModifier: 0
 --- !u!1001 &696258075
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1549,7 +1554,7 @@ RectTransform:
   m_Children:
   - {fileID: 1445984299}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -1562,6 +1567,80 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1462391938}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2139124734
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3076499699800474064, guid: 0f7caf6232966404382f5241ca4a2075,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -9.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 3076499699800474064, guid: 0f7caf6232966404382f5241ca4a2075,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.84
+      objectReference: {fileID: 0}
+    - target: {fileID: 3076499699800474064, guid: 0f7caf6232966404382f5241ca4a2075,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -21.72
+      objectReference: {fileID: 0}
+    - target: {fileID: 3076499699800474064, guid: 0f7caf6232966404382f5241ca4a2075,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3076499699800474064, guid: 0f7caf6232966404382f5241ca4a2075,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3076499699800474064, guid: 0f7caf6232966404382f5241ca4a2075,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3076499699800474064, guid: 0f7caf6232966404382f5241ca4a2075,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3076499699800474064, guid: 0f7caf6232966404382f5241ca4a2075,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3076499699800474064, guid: 0f7caf6232966404382f5241ca4a2075,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3076499699800474064, guid: 0f7caf6232966404382f5241ca4a2075,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3076499699800474064, guid: 0f7caf6232966404382f5241ca4a2075,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3076499699800474074, guid: 0f7caf6232966404382f5241ca4a2075,
+        type: 3}
+      propertyPath: m_Name
+      value: MeleeEnnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 3076499699800474074, guid: 0f7caf6232966404382f5241ca4a2075,
+        type: 3}
+      propertyPath: m_TagString
+      value: Ennemy
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 0f7caf6232966404382f5241ca4a2075, type: 3}
 --- !u!1001 &4872866962313143451
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1911,7 +1990,7 @@ PrefabInstance:
     - target: {fileID: 8905300546908222539, guid: 7b5b74b76d81dce4a954ebb87e9ca1af,
         type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 8905300546908222539, guid: 7b5b74b76d81dce4a954ebb87e9ca1af,
         type: 3}

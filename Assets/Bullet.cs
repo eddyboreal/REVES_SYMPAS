@@ -47,9 +47,18 @@ public class Bullet : MonoBehaviour
         }
     }
 
+    void OnTriggerEnter(Collision collison)
+    {
+        if (collison.gameObject.CompareTag("Ennemy"))
+        {
+            collison.gameObject.GetComponent<Ennemy>().TakeDamage(10, collison.GetContact(0).point);
+            Destroy(this.gameObject);
+        }
+    }
+
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Player" || collision.gameObject.tag == "FireStart")
+        if (collision.gameObject.tag == "Player" || collision.gameObject.tag == "FireStart" || collision.gameObject.CompareTag("Ennemy"))
         {
             Debug.Log("Player collides " + collision.transform.name);
             Physics.IgnoreCollision(collision.gameObject.GetComponent<Collider>(), GetComponent<Collider>());
@@ -58,9 +67,9 @@ public class Bullet : MonoBehaviour
         {
             //Ray ray = new Ray(collision.GetContact(0).point, Vector3.Reflect(transform.position, collision.GetContact(0).normal));
 
-            SetDirection(Vector3.Reflect(transform.position, collision.GetContact(0).normal));
+            SetDirection(Vector3.Reflect(transform.position, collision.GetContact(0).normal).normalized);
             rb.velocity = Vector3.zero;
-            rb.velocity = direction.normalized * speed;
+            rb.velocity = direction * speed;
 
             Debug.Log(rb.velocity);
         }

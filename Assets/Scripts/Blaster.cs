@@ -74,10 +74,9 @@ public class Blaster : MonoBehaviour
         lineRenderer.SetPosition(0, fpsCam.transform.position);
 
         float remainingLength = maxLength;
-
-        if (shoot)
-        {
-            GameObject newBullet = Instantiate(Bullet, FireStart.position, FireStart.rotation) as GameObject;
+        if (shoot)
+        {
+            GameObject newBullet = Instantiate(Bullet, FireStart.position, FireStart.rotation) as GameObject;
         }
 
         for (int i = 0; i < reflections; ++i)
@@ -102,11 +101,11 @@ public class Blaster : MonoBehaviour
                     );
                 }
 
-                if (hit.transform.GetComponent<Ennemy>() && shoot)
+                /*if (hit.transform.GetComponent<Ennemy>() && shoot)
                 {
                     hit.transform.GetComponent<Ennemy>().TakeDamage(damage * (i+1), hit.point);
                     shoot = false;
-                }
+                }*/
             }
             else
             {
