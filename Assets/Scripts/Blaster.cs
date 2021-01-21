@@ -9,7 +9,6 @@ public class Blaster : MonoBehaviour
     public float TileFadeInDuration;
     public float TileFadeOutDuration;
 
-
     private float elapsedLoadingTime = 0f;
     public Slider loadingGauge = default;
     public Camera fpsCam;
@@ -26,10 +25,12 @@ public class Blaster : MonoBehaviour
     private RaycastHit[] hits;
     private bool shoot = false;
 
+    public Transform FireStart;
+
     void Awake()
     {
         lineRenderer = GetComponent<LineRenderer>();
-        lineRenderer.SetWidth(0.1f, 0.1f);
+        lineRenderer.SetWidth(0.25f, 0.25f);
 
         hits = new RaycastHit[reflections];
     }
@@ -65,9 +66,9 @@ public class Blaster : MonoBehaviour
 
     void RaycastReflection()
     {
-        ray = new Ray(transform.position, transform.forward);
+        ray = new Ray(FireStart.position, FireStart.forward);
         lineRenderer.positionCount = 1;
-        lineRenderer.SetPosition(0, transform.position);
+        lineRenderer.SetPosition(0, FireStart.position);
 
         float remainingLength = maxLength;
 
@@ -95,8 +96,8 @@ public class Blaster : MonoBehaviour
 
                 if (hit.transform.GetComponent<Ennemy>() && shoot)
                 {
-
-                    hit.transform.GetComponent<Ennemy>().TakeDamage(damage);
+                    hit.transform.GetComponent<Ennemy>().TakeDamage(damage * (i+1));
+                    shoot = false;
                 }
             }
             else
