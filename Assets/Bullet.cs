@@ -47,11 +47,12 @@ public class Bullet : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter(Collision collison)
+    void OnTriggerEnter(Collider collider)
     {
-        if (collison.gameObject.CompareTag("Ennemy"))
+        if (collider.gameObject.CompareTag("Ennemy"))
         {
-            collison.gameObject.GetComponent<Ennemy>().TakeDamage(10, collison.GetContact(0).point);
+            Debug.Log("Player triggers " + collider.transform.name);
+            collider.gameObject.GetComponent<Ennemy>().TakeDamage(10, Vector3.zero, Vector3.zero);
             Destroy(this.gameObject);
         }
     }
