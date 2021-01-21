@@ -14,8 +14,11 @@ public class Bullet : MonoBehaviour
     public Transform FireStart;
 
     //public RaycastHit[] hits;
+    public Vector3 originCamPosition;
     public Vector3[] transforms;
     private int hitIndex = 0;
+
+    private int frameCount = 0;
 
     void Start()
     {
@@ -35,6 +38,8 @@ public class Bullet : MonoBehaviour
         }
         
         Debug.Log(rb.velocity); */
+
+        
     }
 
     void Update()
@@ -43,6 +48,8 @@ public class Bullet : MonoBehaviour
         {         
             transform.position = Vector3.MoveTowards(transform.position, transforms[hitIndex], 0.25f); 
         }
+
+        
     }
 
     public void SetDirection(Vector3 direction)
@@ -61,30 +68,44 @@ public class Bullet : MonoBehaviour
 
     void OnTriggerEnter(Collider collider)
     {
-        if (collider.gameObject.CompareTag("Ennemy"))
+        if(frameCount != Time.frameCount)
         {
-            Debug.Log("Player triggers " + collider.transform.name);
-            collider.gameObject.GetComponent<Ennemy>().TakeDamage(10, Vector3.zero, Vector3.zero);
-            Destroy(gameObject);
-        }
-        else
-        {
-            ++hitIndex;
-
-            if(hitIndex < transforms.Length)
+            if (collider.gameObject.CompareTag("Ennemy"))
             {
-                Vector3 relativePos = (transforms[hitIndex] - transform.position).normalized;
-
-                Quaternion rotation = Quaternion.LookRotation(relativePos, Vector3.up);
-                transform.rotation = rotation;
-                Debug.Log("a");
-            }
-
-            if(hitIndex >= transforms.Length)
-            {
+                Debug.Log("Player triggers " + collider.transform.name);
+                if (hitIndex == 0)
+                {
+                    collider.gameObject.GetComponent<Ennemy>().TakeDamage(10, transforms[hitIndex], originCamPosition);
+                }
+                else
+                {
+                    collider.gameObject.GetComponent<Ennemy>().TakeDamage(10, transforms[hitIndex], transforms[hitIndex - 1]);
+                }
                 Destroy(gameObject);
             }
+            else
+            {
+                Debug.Log(collider.gameObject.transform.position);
+
+                ++hitIndex;
+
+                if (hitIndex < transforms.Length)
+                {
+                    Vector3 relativePos = (transforms[hitIndex] - transform.position).normalized;
+
+                    Quaternion rotation = Quaternion.LookRotation(relativePos, Vector3.up);
+                    transform.rotation = rotation;
+                    Debug.Log("a");
+                }
+
+                if (hitIndex >= transforms.Length)
+                {
+                    Destroy(gameObject);
+                }
+            }
         }
+        
+        frameCount = Time.frameCount;
     }
 
     void OnCollisionEnter(Collision collision)

@@ -13,6 +13,10 @@ public class Ennemy : MonoBehaviour
     public float StartRaycastingDistance = 5f;
 
     public Material playerMat;
+    public Material playerHitOrangeMat;
+    public Material playerHitYellowMat;
+
+
     public float cubeScale;
     public float hitForce;
     public float explosionRadius;
@@ -21,6 +25,8 @@ public class Ennemy : MonoBehaviour
     public GameObject cone;
 
     private GameObject myCone;
+    private GameObject myCone2;
+    private GameObject myCone3;
     private Vector3 myHitPosition;
 
     RaycastHit hit;
@@ -90,11 +96,12 @@ public class Ennemy : MonoBehaviour
 
         Debug.Log(hitPosition + " " + rayOrigin);
         myCone = Instantiate(cone, hitPosition, Quaternion.LookRotation((rayOrigin - hitPosition).normalized));
+        myCone2 = Instantiate(cone, hitPosition, Quaternion.LookRotation((rayOrigin - hitPosition).normalized));
+        myCone2.transform.localScale += new Vector3(0.1f,0.1f,0.1f);
+        myCone3 = Instantiate(cone, hitPosition, Quaternion.LookRotation((rayOrigin - hitPosition).normalized));
+        myCone3.transform.localScale += new Vector3(0.7f, 0.7f, 0.7f);
         myHitPosition = hitPosition;
-
         StartCoroutine(explosion());
-
-        
 
     }
 
@@ -106,7 +113,7 @@ public class Ennemy : MonoBehaviour
         piece.transform.position = transform.position - transform.localScale/2 + new Vector3(cubeScale * x, cubeScale * y, cubeScale * z);
         piece.transform.localScale = new Vector3(cubeScale, cubeScale, cubeScale);
    
-            piece.GetComponent<MeshRenderer>().material = playerMat;
+        piece.GetComponent<MeshRenderer>().material = playerMat;
     }
 
     IEnumerator explosion()
@@ -114,6 +121,18 @@ public class Ennemy : MonoBehaviour
         Debug.Log("d");
         yield return new WaitForSeconds(0.1f);
         Debug.Log("c");
+
+        foreach (Collider hit in myCone3.GetComponent<ConeController>().colliderList)
+        {
+
+            hit.gameObject.GetComponent<MeshRenderer>().material = playerHitOrangeMat;
+        }
+
+        foreach (Collider hit in myCone2.GetComponent<ConeController>().colliderList)
+        {
+
+            hit.gameObject.GetComponent<MeshRenderer>().material = playerHitYellowMat;
+        }
 
         foreach (Collider hit in myCone.GetComponent<ConeController>().colliderList)
         {
@@ -124,7 +143,7 @@ public class Ennemy : MonoBehaviour
             if (rb != null)
             {
                 rb.AddExplosionForce(hitForce, myHitPosition, explosionRadius, UpwardModifier);
-                hit.gameObject.GetComponent<BoxCollider>().isTrigger = true;
+                hit.isTrigger = true;
             }
         }
     }
