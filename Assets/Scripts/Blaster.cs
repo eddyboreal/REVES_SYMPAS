@@ -30,12 +30,16 @@ public class Blaster : MonoBehaviour
     public GameObject Bullet;
     public float speed = 50f;
 
+    int PlayerMask = 1 << 9;
+
     void Awake()
     {
         lineRenderer = GetComponent<LineRenderer>();
         lineRenderer.SetWidth(0.25f, 0.25f);
 
         hits = new RaycastHit[reflections];
+
+        PlayerMask = ~PlayerMask;
     }
 
     void Update()
@@ -75,15 +79,11 @@ public class Blaster : MonoBehaviour
 
         float remainingLength = maxLength;
 
-        if (shoot)
-        {
-            GameObject newBullet = Instantiate(Bullet, FireStart.position, FireStart.rotation) as GameObject;
-        }
-
         for (int i = 0; i < reflections; ++i)
         {
-            if (Physics.Raycast(ray.origin, ray.direction, out hit, remainingLength))
+            if (Physics.Raycast(ray.origin, ray.direction, out hit, remainingLength, PlayerMask))
             {
+                hits[i] = hit;
                 ++lineRenderer.positionCount;
                 lineRenderer.SetPosition(lineRenderer.positionCount - 1, hit.point);
                 remainingLength -= Vector3.Distance(ray.origin, hit.point);
@@ -114,5 +114,17 @@ public class Blaster : MonoBehaviour
                 lineRenderer.SetPosition(lineRenderer.positionCount - 1, ray.origin + ray.direction * remainingLength);
             }
         }
+        if (shoot)
+        {
+            GameObject newBullet = Instantiate(Bullet, FireStart.position, FireStart.rotation) as GameObject;
+            newBullet.GetComponent<Bullet>().transforms = new Vector3[hits.Length];
+            for (int i = 0; i < hits.Length; ++i)
+            {
+                newBullet.GetComponent<Bullet>().transforms[i] = hits[i].point;
+            }
+            //newBullet.GetComponent<Bullet>().SetHits(hits);
+            shoot = false;
+        }
     }
+
 }

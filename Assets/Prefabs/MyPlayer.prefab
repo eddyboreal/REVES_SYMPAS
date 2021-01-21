@@ -119,8 +119,8 @@ MonoBehaviour:
   reflections: 5
   maxLength: 300
   FireStart: {fileID: 671415331959190661}
-  Bullet: {fileID: 0}
-  speed: 50
+  Bullet: {fileID: 1170744857039610, guid: 75f2b948ef198bf46b2b055c4c804999, type: 3}
+  speed: 6
 --- !u!1 &8905300546012156590
 GameObject:
   m_ObjectHideFlags: 0
@@ -218,7 +218,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: daec82b8e4159ea4783db002010ea369, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouseSensitivity: 200
+  mouseSensitivity: 300
   PlayerBody: {fileID: 8905300546908222539}
 --- !u!1 &8905300546908222538
 GameObject:

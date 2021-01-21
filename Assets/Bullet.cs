@@ -13,13 +13,17 @@ public class Bullet : MonoBehaviour
     public Transform Camera;
     public Transform FireStart;
 
+    //public RaycastHit[] hits;
+    public Vector3[] transforms;
+    private int hitIndex = 0;
+
     void Start()
     {
         rb.GetComponent<Rigidbody>();
         Camera = GameObject.FindGameObjectWithTag("Camera").GetComponent<Transform>();
         FireStart = GameObject.FindGameObjectWithTag("FireStart").GetComponent<Transform>();
 
-        Ray ray = new Ray(Camera.transform.position, Camera.transform.forward);
+        /*Ray ray = new Ray(Camera.transform.position, Camera.transform.forward);
         RaycastHit hit = new RaycastHit();
         if (Physics.Raycast(ray.origin, ray.direction, out hit))
         {
@@ -30,7 +34,15 @@ public class Bullet : MonoBehaviour
             rb.velocity = FireStart.forward * speed;
         }
         
-        Debug.Log(rb.velocity);
+        Debug.Log(rb.velocity); */
+    }
+
+    void Update()
+    {
+        if(hitIndex < transforms.Length)
+        {         
+            transform.position = Vector3.MoveTowards(transform.position, transforms[hitIndex], 0.25f); 
+        }
     }
 
     public void SetDirection(Vector3 direction)
@@ -47,18 +59,37 @@ public class Bullet : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter(Collision collison)
+    void OnTriggerEnter(Collider collider)
     {
-        if (collison.gameObject.CompareTag("Ennemy"))
+        if (collider.gameObject.CompareTag("Ennemy"))
         {
-            collison.gameObject.GetComponent<Ennemy>().TakeDamage(10,Vector3.zero,Vector3.zero);
-            Destroy(this.gameObject);
+            Debug.Log("Player triggers " + collider.transform.name);
+            collider.gameObject.GetComponent<Ennemy>().TakeDamage(10, Vector3.zero, Vector3.zero);
+            Destroy(gameObject);
+        }
+        else
+        {
+            ++hitIndex;
+
+            if(hitIndex < transforms.Length)
+            {
+                Vector3 relativePos = (transforms[hitIndex] - transform.position).normalized;
+
+                Quaternion rotation = Quaternion.LookRotation(relativePos, Vector3.up);
+                transform.rotation = rotation;
+                Debug.Log("a");
+            }
+
+            if(hitIndex >= transforms.Length)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Player" || collision.gameObject.tag == "FireStart" || collision.gameObject.CompareTag("Ennemy"))
+        /*if (collision.gameObject.tag == "Player" || collision.gameObject.tag == "FireStart" || collision.gameObject.CompareTag("Ennemy"))
         {
             Debug.Log("Player collides " + collision.transform.name);
             Physics.IgnoreCollision(collision.gameObject.GetComponent<Collider>(), GetComponent<Collider>());
@@ -72,6 +103,6 @@ public class Bullet : MonoBehaviour
             rb.velocity = direction * speed;
 
             Debug.Log(rb.velocity);
-        }
+        }*/
     }
 }
