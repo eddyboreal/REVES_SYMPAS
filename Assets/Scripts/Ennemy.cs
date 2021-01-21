@@ -17,6 +17,8 @@ public class Ennemy : MonoBehaviour
     public float explosionRadius;
     public float UpwardModifier;
 
+    public GameObject cone;
+
     RaycastHit hit;
 
     protected virtual void Awake()
@@ -32,18 +34,18 @@ public class Ennemy : MonoBehaviour
         }
     }
 
-    public virtual void TakeDamage(int damage, Vector3 hitPosition)
+    public virtual void TakeDamage(int damage, Vector3 hitPosition, Vector3 rayOrigin)
     {
         health -= damage;
         if (health <= 0)
         {
-            Die(hitPosition);
+            Die(hitPosition, rayOrigin);
         }
     }
 
-    public virtual void Die(Vector3 hitPosition)
+    public virtual void Die(Vector3 hitPosition, Vector3 rayOrigin)
     {
-        Explode(hitPosition);
+        Explode(hitPosition, rayOrigin);
         //Destroy(gameObject);
     }
 
@@ -65,11 +67,11 @@ public class Ennemy : MonoBehaviour
         return false;
     }
 
-    private void Explode(Vector3 hitPosition)
+    private void Explode(Vector3 hitPosition, Vector3 rayOrigin)
     {
         gameObject.SetActive(false);
 
-        for(int i = 0; i< 7; i++)
+        for (int i = 0; i< 7; i++)
         {
             for (int j = 0; j < 14; j++)
             {
@@ -81,6 +83,8 @@ public class Ennemy : MonoBehaviour
             }
         }
 
+        Instantiate(cone, hitPosition, Quaternion.FromToRotation(-Vector3.forward, (hitPosition +(hitPosition-rayOrigin) - hitPosition)));
+        
         Collider[] colliders = Physics.OverlapSphere(hitPosition, 10);
 
         foreach(Collider hit in colliders)

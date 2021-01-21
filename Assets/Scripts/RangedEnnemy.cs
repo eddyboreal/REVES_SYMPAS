@@ -34,14 +34,14 @@ public class RangedEnnemy : Ennemy
         base.Update();
     }
 
-    public override void TakeDamage(int damage, Vector3 hitPosition)
+    public override void TakeDamage(int damage, Vector3 hitPosition, Vector3 rayOrigin)
     {
-        base.TakeDamage(damage, hitPosition);
+        base.TakeDamage(damage, hitPosition, rayOrigin);
     }
 
-    public override void Die(Vector3 hitPosition)
+    public override void Die(Vector3 hitPosition, Vector3 rayOrigin)
     {
-        base.Die(hitPosition);
+        base.Die(hitPosition, rayOrigin);
     }
 
     public override void StartFollowing()
