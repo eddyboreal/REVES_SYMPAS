@@ -9,7 +9,7 @@ LineRenderer:
   m_GameObject: {fileID: 8903638868695198839}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_MotionVectors: 0
   m_LightProbeUsage: 0
@@ -18,7 +18,7 @@ LineRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a4f5c66fc05a7054aadb077eea1a49a3, type: 2}
+  - {fileID: 2100000, guid: f00425f3bf944d64ea6e44f8463e641b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -63,7 +63,7 @@ LineRenderer:
     colorGradient:
       serializedVersion: 2
       key0: {r: 1, g: 0, b: 0, a: 1}
-      key1: {r: 1, g: 1, b: 1, a: 1}
+      key1: {r: 1, g: 0, b: 0, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -86,13 +86,13 @@ LineRenderer:
       atime5: 0
       atime6: 0
       atime7: 0
-      m_Mode: 0
+      m_Mode: 1
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
     numCornerVertices: 0
     numCapVertices: 0
     alignment: 0
-    textureMode: 0
+    textureMode: 2
     shadowBias: 0.5
     generateLightingData: 0
   m_UseWorldSpace: 1
@@ -110,7 +110,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
-  loadTime: 1.5
+  loadTime: 0.75
   TileFadeInDuration: 0
   TileFadeOutDuration: 0
   loadingGauge: {fileID: 0}
@@ -118,7 +118,7 @@ MonoBehaviour:
   Helper: {fileID: 0}
   reflections: 5
   maxLength: 300
-  FireStart: {fileID: 0}
+  FireStart: {fileID: 671415331959190661}
 --- !u!1 &8905300546012156590
 GameObject:
   m_ObjectHideFlags: 0
@@ -503,6 +503,12 @@ GameObject:
 --- !u!4 &8900482903136464341 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4826450088584990, guid: 119551172e2002344983c075ab97ef79,
+    type: 3}
+  m_PrefabInstance: {fileID: 8905300547132492491}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &671415331959190661 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8269914060712132174, guid: 119551172e2002344983c075ab97ef79,
     type: 3}
   m_PrefabInstance: {fileID: 8905300547132492491}
   m_PrefabAsset: {fileID: 0}
