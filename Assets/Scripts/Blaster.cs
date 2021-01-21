@@ -96,7 +96,7 @@ public class Blaster : MonoBehaviour
 
                 if (hit.transform.GetComponent<Ennemy>() && shoot)
                 {
-                    hit.transform.GetComponent<Ennemy>().TakeDamage(damage * (i+1));
+                    hit.transform.GetComponent<Ennemy>().TakeDamage(damage * (i+1), hit.point);
                     shoot = false;
                 }
             }

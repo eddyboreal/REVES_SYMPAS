@@ -11,6 +11,11 @@ public class Ennemy : MonoBehaviour
     public float Distance;
     public float StartRaycastingDistance = 5f;
 
+    public float cubeScale;
+    public float hitForce;
+    public float explosionRadius;
+    public float UpwardModifier;
+
     RaycastHit hit;
 
     protected virtual void Awake()
@@ -26,18 +31,18 @@ public class Ennemy : MonoBehaviour
         }
     }
 
-    public virtual void TakeDamage(int damage)
+    public virtual void TakeDamage(int damage, Vector3 hitPosition)
     {
         health -= damage;
         if (health <= 0)
         {
-            Die();
+            Die(hitPosition);
         }
     }
 
-    public virtual void Die()
+    public virtual void Die(Vector3 hitPosition)
     {
-        Explode();
+        Explode(hitPosition);
         //Destroy(gameObject);
     }
 
@@ -59,7 +64,7 @@ public class Ennemy : MonoBehaviour
         return false;
     }
 
-    private void Explode()
+    private void Explode(Vector3 hitPosition)
     {
         gameObject.SetActive(false);
 
@@ -69,8 +74,20 @@ public class Ennemy : MonoBehaviour
             {
                 for (int k = 0; k < 10; k++)
                 {
+                    
                     createPieces(i, j, k);
                 }
+            }
+        }
+
+        Collider[] colliders = Physics.OverlapSphere(hitPosition, 10);
+
+        foreach(Collider hit in colliders)
+        {
+            Rigidbody rb = hit.GetComponent<Rigidbody>();
+            if(rb != null)
+            {
+                rb.AddExplosionForce(hitForce, hitPosition, explosionRadius, UpwardModifier);
             }
         }
 
@@ -81,11 +98,15 @@ public class Ennemy : MonoBehaviour
         GameObject piece;
         piece = GameObject.CreatePrimitive(PrimitiveType.Cube);
 
-        piece.transform.position = transform.position + new Vector3(0.2f*x, 0.2f*y, 0.2f*z);
-        piece.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+        piece.transform.position = transform.position - transform.localScale/2 + new Vector3(cubeScale * x, cubeScale * y, cubeScale * z);
+        piece.transform.localScale = new Vector3(cubeScale, cubeScale, cubeScale);
 
-        piece.AddComponent<Rigidbody>();
-        piece.GetComponent<Rigidbody>().mass = 0.2f;
+        if (!piece.GetComponent<Rigidbody>())
+        {
+            piece.AddComponent<Rigidbody>();
+            piece.GetComponent<Rigidbody>().mass = 0.2f;
+        }
+        
     }
 
 }

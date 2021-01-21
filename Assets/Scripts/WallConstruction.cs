@@ -24,7 +24,13 @@ public class WallConstruction : MonoBehaviour
 
     private void Awake()
     {
-        if (NumberOfXCubes + NumberOfYCubes != gameObject.transform.childCount && Application.isEditor)
+        
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        /*if (NumberOfXCubes + NumberOfYCubes != gameObject.transform.childCount && Application.isEditor)
         {
             for (int i = this.transform.childCount; i > 0; --i)
             {
@@ -51,12 +57,6 @@ public class WallConstruction : MonoBehaviour
                 }
                 zSpawn += cubeStep;
             }
-        }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        }*/
     }
 }

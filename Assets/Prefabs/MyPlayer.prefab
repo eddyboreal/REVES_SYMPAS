@@ -111,8 +111,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 10
   loadTime: 0.75
-  TileFadeInDuration: 0
-  TileFadeOutDuration: 0
+  TileFadeInDuration: 0.5
+  TileFadeOutDuration: 1.5
   loadingGauge: {fileID: 0}
   fpsCam: {fileID: 8905300546012156589}
   Helper: {fileID: 0}
@@ -233,7 +233,7 @@ GameObject:
   - component: {fileID: 3912941077468265715}
   m_Layer: 0
   m_Name: MyPlayer
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

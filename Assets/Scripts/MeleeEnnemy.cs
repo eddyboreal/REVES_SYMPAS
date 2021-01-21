@@ -18,14 +18,14 @@ public class MeleeEnnemy : Ennemy
         base.Update();
     }
 
-    public override void TakeDamage(int damage)
+    public override void TakeDamage(int damage, Vector3 hitPosition)
     {
-        base.TakeDamage(damage);
+        base.TakeDamage(damage, hitPosition);
     }
 
-    public override void Die()
+    public override void Die(Vector3 hitPosition)
     {
-        base.Die();
+        base.Die(hitPosition);
     }
 
     public override void StartFollowing()

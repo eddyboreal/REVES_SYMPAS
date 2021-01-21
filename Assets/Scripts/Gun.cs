@@ -61,7 +61,7 @@ public class Gun : MonoBehaviour
             Ennemy ennemy = hit.transform.GetComponent<Ennemy>();
             if (ennemy)
             {
-                ennemy.TakeDamage(damage);
+               // ennemy.TakeDamage(damage);
             }
         }
     }
