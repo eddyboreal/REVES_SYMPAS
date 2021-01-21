@@ -69,9 +69,6 @@ public class Blaster : MonoBehaviour
         ray = new Ray(FireStart.position, FireStart.forward);
         lineRenderer.positionCount = 1;
         lineRenderer.SetPosition(0, FireStart.position);
-        //++lineRenderer.positionCount;
-        //lineRenderer.SetPosition(lineRenderer.positionCount - 1, FireStart.position);
-
 
         float remainingLength = maxLength;
 
@@ -99,8 +96,8 @@ public class Blaster : MonoBehaviour
 
                 if (hit.transform.GetComponent<Ennemy>() && shoot)
                 {
-
-                    hit.transform.GetComponent<Ennemy>().TakeDamage(damage);
+                    hit.transform.GetComponent<Ennemy>().TakeDamage(damage * (i+1));
+                    shoot = false;
                 }
             }
             else

@@ -748,7 +748,7 @@ PrefabInstance:
     - target: {fileID: 1327478130886040268, guid: a7c0047d2b0cf0f4aaa6dcec446ab296,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.3
+      value: -11.41
       objectReference: {fileID: 0}
     - target: {fileID: 1327478130886040268, guid: a7c0047d2b0cf0f4aaa6dcec446ab296,
         type: 3}
@@ -1884,6 +1884,11 @@ PrefabInstance:
       propertyPath: FireStart
       value: 
       objectReference: {fileID: 8905300547869518291}
+    - target: {fileID: 8905300545886937406, guid: 7b5b74b76d81dce4a954ebb87e9ca1af,
+        type: 3}
+      propertyPath: loadTime
+      value: 0.75
+      objectReference: {fileID: 0}
     - target: {fileID: 8905300545886937407, guid: 7b5b74b76d81dce4a954ebb87e9ca1af,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
