@@ -83,8 +83,10 @@ public class Ennemy : MonoBehaviour
             }
         }
 
-        Instantiate(cone, hitPosition, Quaternion.FromToRotation(-Vector3.forward, (hitPosition +(hitPosition-rayOrigin) - hitPosition)));
-        
+        //Instantiate(cone, hitPosition, Quaternion.FromToRotation(-Vector3.forward, transform.position -  hitPosition));
+        Vector3 a = hitPosition + Vector3.Normalize(hitPosition - rayOrigin) * 5;
+        Instantiate(cone, hitPosition, Quaternion.FromToRotation(-Vector3.forward, a - hitPosition));
+
         Collider[] colliders = Physics.OverlapSphere(hitPosition, 10);
 
         foreach(Collider hit in colliders)

@@ -32,7 +32,7 @@ Transform:
   m_GameObject: {fileID: 3076499699800474074}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 5, y: 1, z: 12.3}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.4, y: 2.8, z: 1.4}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -44,7 +44,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3076499699800474074}
-  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &3076499699800474070
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -95,7 +95,7 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
-  m_Height: 2
+  m_Height: 1.2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &3076499699800474068
@@ -124,7 +124,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 1
-  m_Speed: 14
+  m_Speed: 10
   m_Acceleration: 50
   avoidancePriority: 50
   m_AngularSpeed: 720
@@ -132,8 +132,8 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 2
-  m_BaseOffset: 1
+  m_Height: 1
+  m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!95 &3076499699800474066
@@ -167,12 +167,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f20179f9570b2544daa445cb6972af5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 50
+  health: 10
   damageDone: 10
   player: {fileID: 0}
   waitDetectionToFollow: 1
-  Distance: 0
-  StartRaycastingDistance: 15
   followingPlayer: 0
   RefreshPlayerPosition: 1
+  Distance: 0
+  StartRaycastingDistance: 15
+  playerMat: {fileID: 2100000, guid: 0d7f64799d1acab4a898129f6146ca42, type: 2}
+  cubeScale: 0.2
+  hitForce: 100
+  explosionRadius: 10
+  UpwardModifier: 0
+  cone: {fileID: 6193397641913420517, guid: 504dee4402ae45f46b308ad6bd700770, type: 3}
   SuicideDistance: 3.5
