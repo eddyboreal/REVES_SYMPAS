@@ -10,7 +10,7 @@ public class ConeController : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         
-        if (!colliderList.Contains(other))
+        if (!colliderList.Contains(other) && other.gameObject.CompareTag("Ennemy"))
         {
             colliderList.Add(other);
         }

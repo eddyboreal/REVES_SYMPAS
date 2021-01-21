@@ -109,6 +109,7 @@ public class Ennemy : MonoBehaviour
     {
         GameObject piece;
         piece = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        piece.tag = "Ennemy";
 
         piece.transform.position = transform.position - transform.localScale/2 + new Vector3(cubeScale * x, cubeScale * y, cubeScale * z);
         piece.transform.localScale = new Vector3(cubeScale, cubeScale, cubeScale);
@@ -119,7 +120,7 @@ public class Ennemy : MonoBehaviour
     IEnumerator explosion()
     {
         Debug.Log("d");
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(2f);
         Debug.Log("c");
 
         foreach (Collider hit in myCone3.GetComponent<ConeController>().colliderList)
@@ -137,14 +138,18 @@ public class Ennemy : MonoBehaviour
         foreach (Collider hit in myCone.GetComponent<ConeController>().colliderList)
         {
 
-            hit.gameObject.AddComponent<Rigidbody>();
-            hit.gameObject.GetComponent<Rigidbody>().mass = 0.2f;
-            Rigidbody rb = hit.GetComponent<Rigidbody>();
-            if (rb != null)
+            if (!gameObject.GetComponent<Rigidbody>())
             {
-                rb.AddExplosionForce(hitForce, myHitPosition, explosionRadius, UpwardModifier);
-                hit.isTrigger = true;
+                hit.gameObject.AddComponent<Rigidbody>();
+                hit.gameObject.GetComponent<Rigidbody>().mass = 0.2f;
             }
+            Rigidbody rb = hit.GetComponent<Rigidbody>();
+                if (rb != null)
+                {
+                    rb.AddExplosionForce(hitForce, myHitPosition, explosionRadius, UpwardModifier);
+                    hit.isTrigger = true;
+                }
+            
         }
     }
 
