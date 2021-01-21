@@ -69,7 +69,7 @@ public class Ennemy : MonoBehaviour
     {
         gameObject.SetActive(false);
 
-        for(int i = 0; i< 7; i++)
+        for (int i = 0; i< 7; i++)
         {
             for (int j = 0; j < 14; j++)
             {
