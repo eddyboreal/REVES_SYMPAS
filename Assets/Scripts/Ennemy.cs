@@ -37,7 +37,8 @@ public class Ennemy : MonoBehaviour
 
     public virtual void Die()
     {
-        Destroy(gameObject);
+        Explode();
+        //Destroy(gameObject);
     }
 
     public virtual void StartFollowing()
@@ -56,6 +57,35 @@ public class Ennemy : MonoBehaviour
             }   
         }
         return false;
+    }
+
+    private void Explode()
+    {
+        gameObject.SetActive(false);
+
+        for(int i = 0; i< 10; i++)
+        {
+            for (int j = 0; j < 10; j++)
+            {
+                for (int k = 0; k < 10; k++)
+                {
+                    createPieces(i, j, k);
+                }
+            }
+        }
+
+    }
+
+    void createPieces(int x, int y, int z)
+    {
+        GameObject piece;
+        piece = GameObject.CreatePrimitive(PrimitiveType.Cube);
+
+        piece.transform.position = transform.position + new Vector3(0.2f*x, 0.2f*y, 0.2f*z);
+        piece.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+
+        piece.AddComponent<Rigidbody>();
+        piece.GetComponent<Rigidbody>().mass = 0.2f;
     }
 
 }
