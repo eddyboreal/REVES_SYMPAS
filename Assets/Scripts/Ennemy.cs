@@ -124,6 +124,7 @@ public class Ennemy : MonoBehaviour
             if (rb != null)
             {
                 rb.AddExplosionForce(hitForce, myHitPosition, explosionRadius, UpwardModifier);
+                hit.gameObject.GetComponent<BoxCollider>().isTrigger = true;
             }
         }
     }
