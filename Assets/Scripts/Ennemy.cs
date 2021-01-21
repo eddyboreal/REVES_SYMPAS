@@ -113,6 +113,8 @@ public class Ennemy : MonoBehaviour
 
         piece.transform.position = transform.position - transform.localScale/2 + new Vector3(cubeScale * x, cubeScale * y, cubeScale * z);
         piece.transform.localScale = new Vector3(cubeScale, cubeScale, cubeScale);
+
+        //piece.transform.parent = transform;
    
         piece.GetComponent<MeshRenderer>().material = playerMat;
     }
@@ -120,10 +122,10 @@ public class Ennemy : MonoBehaviour
     IEnumerator explosion()
     {
         Debug.Log("d");
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(0.01f);
         Debug.Log("c");
 
-        foreach (Collider hit in myCone3.GetComponent<ConeController>().colliderList)
+        /*foreach (Collider hit in myCone3.GetComponent<ConeController>().colliderList)
         {
 
             hit.gameObject.GetComponent<MeshRenderer>().material = playerHitOrangeMat;
@@ -133,24 +135,32 @@ public class Ennemy : MonoBehaviour
         {
 
             hit.gameObject.GetComponent<MeshRenderer>().material = playerHitYellowMat;
-        }
+        }*/
 
-        foreach (Collider hit in myCone.GetComponent<ConeController>().colliderList)
+        Collider[] colliders = Physics.OverlapSphere(myHitPosition, 10);
+        Material[] materials = new Material[3];
+        materials[0] = playerMat;
+        materials[1] = playerHitOrangeMat;
+        materials[2] = playerHitYellowMat;
+
+        foreach (Collider hit in colliders)
         {
-
-            if (!gameObject.GetComponent<Rigidbody>())
+            if(hit.tag == "Ennemy")
             {
-                hit.gameObject.AddComponent<Rigidbody>();
-                hit.gameObject.GetComponent<Rigidbody>().mass = 0.2f;
-            }
-            Rigidbody rb = hit.GetComponent<Rigidbody>();
+                if (!hit.GetComponent<Rigidbody>())
+                {
+                    hit.gameObject.AddComponent<Rigidbody>();
+                    hit.gameObject.GetComponent<Rigidbody>().mass = 0.2f;
+                }
+                Rigidbody rb = hit.GetComponent<Rigidbody>();
                 if (rb != null)
                 {
+                    hit.gameObject.GetComponent<MeshRenderer>().material = materials[Random.Range(0, materials.Length)];
                     rb.AddExplosionForce(hitForce, myHitPosition, explosionRadius, UpwardModifier);
-                    hit.isTrigger = true;
                 }
-            
+            }
         }
+            
     }
 
 }

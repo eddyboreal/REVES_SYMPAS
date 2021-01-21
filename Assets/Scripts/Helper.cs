@@ -5,9 +5,8 @@ using UnityEngine;
 public struct Colors
 {
     public Color red;
-    public Color blue;
+    public Color orange;
     public Color yellow;
-    public Color green;
 
     public Color[] possibleColors;
 }
@@ -15,16 +14,18 @@ public struct Colors
 public class Helper : MonoBehaviour
 {
     public Colors colors;
+    public float TileFadeInDuration;
+    public float TileFadeOutDuration;
+
     // Start is called before the first frame update
     void Start()
     {
         colors = new Colors();
-        colors.red = new Color(1, 0, 0);
-        colors.blue = new Color(0, 0, 1);
-        colors.yellow = new Color(1, 1, 0);
-        colors.green = new Color(0, 1, 0);
+        colors.red = new Color(1, 1, 1);
+        /*colors.orange = new Color(250, 110, 32);
+        colors.yellow = new Color32(255,249,73,255);*/
 
-        colors.possibleColors = new Color[4] { colors.red, colors.blue, colors.yellow, colors.green };
+        colors.possibleColors = new Color[1] {colors.red/*, colors.orange, colors.yellow*/};
     }
 
     // Update is called once per frame

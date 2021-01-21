@@ -6,8 +6,15 @@ public class Blaster : MonoBehaviour
 {
     public int damage = 10;
     public float loadTime = 1.5f;
+
+    public float reloadTime = 3f;
+    public float elapsedReloadingTime = 0;
+
+
     public float TileFadeInDuration;
     public float TileFadeOutDuration;
+
+
 
     private float elapsedLoadingTime = 0f;
     public Slider loadingGauge = default;
@@ -34,6 +41,7 @@ public class Blaster : MonoBehaviour
 
     void Awake()
     {
+        
         lineRenderer = GetComponent<LineRenderer>();
         lineRenderer.SetWidth(0.25f, 0.25f);
 
@@ -46,19 +54,32 @@ public class Blaster : MonoBehaviour
     {
         RaycastReflection();
         LoadBlaster();
+
+        /*Time.timeScale += (1f / 16) * Time.unscaledDeltaTime;
+        Time.timeScale = Mathf.Clamp(Time.timeScale, 0f, 1f);*/
     }
 
     void LoadBlaster()
     {
         shoot = false;
-        if (Input.GetButton("Fire1"))
+
+        if (Input.GetButtonDown("Fire1") && elapsedReloadingTime >= reloadTime)
         {
+            Time.timeScale = 0.05f;
+            Time.fixedDeltaTime = Time.timeScale * 0.2f;
+        }
+
+        if (Input.GetButton("Fire1") && elapsedReloadingTime >= reloadTime)
+        {
+            
+            GetComponentInParent<MouseLook>().mouseSensitivity = 1000;
             elapsedLoadingTime += Time.deltaTime;
 
             loadingGauge.value = elapsedLoadingTime / loadTime;
 
             if (elapsedLoadingTime >= loadTime)
             {
+                elapsedReloadingTime = 0f;
                 loadingGauge.value = 0f;
                 elapsedLoadingTime = 0f;
                 shoot = true;
@@ -66,8 +87,11 @@ public class Blaster : MonoBehaviour
         }
         else
         {
+            Time.timeScale = 1f;
+            GetComponentInParent<MouseLook>().mouseSensitivity = 300;
             loadingGauge.value = 0f;
             elapsedLoadingTime = 0f;
+            elapsedReloadingTime += Time.deltaTime;
         }
     }
 
@@ -93,13 +117,7 @@ public class Blaster : MonoBehaviour
                 
                 if (hit.collider.gameObject.CompareTag("Tile") && shoot)
                 {
-                    Helper.FadeColor(
-                        hit.collider.gameObject.GetComponent<MeshRenderer>(), 
-                        hit.collider.gameObject.GetComponent<MeshRenderer>().material.color, 
-                        Helper.colors.possibleColors[Random.Range(0, Helper.colors.possibleColors.Length - 1)],
-                        TileFadeInDuration,
-                        TileFadeOutDuration
-                    );
+                    hit.collider.GetComponent<TileController>().touched = true;
                 }
             }
             else
