@@ -30,12 +30,16 @@ public class Blaster : MonoBehaviour
     public GameObject Bullet;
     public float speed = 50f;
 
+    int PlayerMask = 1 << 9;
+
     void Awake()
     {
         lineRenderer = GetComponent<LineRenderer>();
         lineRenderer.SetWidth(0.25f, 0.25f);
 
         hits = new RaycastHit[reflections];
+
+        PlayerMask = ~PlayerMask;
     }
 
     void Update()
@@ -77,7 +81,7 @@ public class Blaster : MonoBehaviour
 
         for (int i = 0; i < reflections; ++i)
         {
-            if (Physics.Raycast(ray.origin, ray.direction, out hit, remainingLength))
+            if (Physics.Raycast(ray.origin, ray.direction, out hit, remainingLength, PlayerMask))
             {
                 hits[i] = hit;
                 ++lineRenderer.positionCount;

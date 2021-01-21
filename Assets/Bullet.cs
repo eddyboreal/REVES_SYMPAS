@@ -71,13 +71,15 @@ public class Bullet : MonoBehaviour
         {
             ++hitIndex;
 
-            Vector3 relativePos = (transforms[hitIndex] - transform.position).normalized;
+            if(hitIndex < transforms.Length)
+            {
+                Vector3 relativePos = (transforms[hitIndex] - transform.position).normalized;
 
-            Quaternion rotation = Quaternion.LookRotation(relativePos, Vector3.up);
-            transform.rotation = rotation;
-            Debug.Log("a");
+                Quaternion rotation = Quaternion.LookRotation(relativePos, Vector3.up);
+                transform.rotation = rotation;
+                Debug.Log("a");
+            }
 
-            
             if(hitIndex >= transforms.Length)
             {
                 Destroy(gameObject);
