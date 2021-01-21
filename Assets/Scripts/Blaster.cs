@@ -73,16 +73,13 @@ public class Blaster : MonoBehaviour
         lineRenderer.positionCount = 1;
         lineRenderer.SetPosition(0, fpsCam.transform.position);
 
-        float remainingLength = maxLength;
-        if (shoot)
-        {
-            GameObject newBullet = Instantiate(Bullet, FireStart.position, FireStart.rotation) as GameObject;
-        }
+        float remainingLength = maxLength;
 
         for (int i = 0; i < reflections; ++i)
         {
             if (Physics.Raycast(ray.origin, ray.direction, out hit, remainingLength))
             {
+                hits[i] = hit;
                 ++lineRenderer.positionCount;
                 lineRenderer.SetPosition(lineRenderer.positionCount - 1, hit.point);
                 remainingLength -= Vector3.Distance(ray.origin, hit.point);
@@ -112,5 +109,17 @@ public class Blaster : MonoBehaviour
                 lineRenderer.SetPosition(lineRenderer.positionCount - 1, ray.origin + ray.direction * remainingLength);
             }
         }
+        if (shoot)
+        {
+            GameObject newBullet = Instantiate(Bullet, FireStart.position, FireStart.rotation) as GameObject;
+            newBullet.GetComponent<Bullet>().transforms = new Vector3[hits.Length];
+            for (int i = 0; i < hits.Length; ++i)
+            {
+                newBullet.GetComponent<Bullet>().transforms[i] = hits[i].point;
+            }
+            //newBullet.GetComponent<Bullet>().SetHits(hits);
+            shoot = false;
+        }
     }
+
 }

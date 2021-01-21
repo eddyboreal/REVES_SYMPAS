@@ -738,6 +738,7 @@ MonoBehaviour:
   hitForce: 0
   explosionRadius: 0
   UpwardModifier: 0
+  cone: {fileID: 0}
 --- !u!1001 &696258075
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1910,22 +1911,6 @@ PrefabInstance:
         type: 3}
       propertyPath: fireStart
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8905300545886937406, guid: 7b5b74b76d81dce4a954ebb87e9ca1af,
-        type: 3}
-      propertyPath: Bullet
-      value: 
-      objectReference: {fileID: 1170744857039610, guid: 1fcfcb93d7455e94bb4991c5ab289a41,
-        type: 3}
-    - target: {fileID: 8905300545886937406, guid: 7b5b74b76d81dce4a954ebb87e9ca1af,
-        type: 3}
-      propertyPath: speed
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 8905300546012156498, guid: 7b5b74b76d81dce4a954ebb87e9ca1af,
-        type: 3}
-      propertyPath: mouseSensitivity
-      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 8905300546012156590, guid: 7b5b74b76d81dce4a954ebb87e9ca1af,
         type: 3}
