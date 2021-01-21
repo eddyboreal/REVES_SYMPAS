@@ -11,6 +11,7 @@ public class Ennemy : MonoBehaviour
     public float Distance;
     public float StartRaycastingDistance = 5f;
 
+    public Material playerMat;
     public float cubeScale;
     public float hitForce;
     public float explosionRadius;
@@ -68,11 +69,11 @@ public class Ennemy : MonoBehaviour
     {
         gameObject.SetActive(false);
 
-        for(int i = 0; i< 10; i++)
+        for(int i = 0; i< 7; i++)
         {
-            for (int j = 0; j < 10; j++)
+            for (int j = 0; j < 14; j++)
             {
-                for (int k = 0; k < 10; k++)
+                for (int k = 0; k < 7; k++)
                 {
                     
                     createPieces(i, j, k);
@@ -106,7 +107,7 @@ public class Ennemy : MonoBehaviour
             piece.AddComponent<Rigidbody>();
             piece.GetComponent<Rigidbody>().mass = 0.2f;
         }
-        
+            piece.GetComponent<MeshRenderer>().material = playerMat;
     }
 
 }
