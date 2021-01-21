@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 public class Ennemy : MonoBehaviour
 {
@@ -18,6 +19,9 @@ public class Ennemy : MonoBehaviour
     public float UpwardModifier;
 
     public GameObject cone;
+
+    private GameObject myCone;
+    private Vector3 myHitPosition;
 
     RaycastHit hit;
 
@@ -69,7 +73,8 @@ public class Ennemy : MonoBehaviour
 
     private void Explode(Vector3 hitPosition, Vector3 rayOrigin)
     {
-        gameObject.SetActive(false);
+        gameObject.GetComponent<MeshRenderer>().enabled = false;
+        gameObject.GetComponent<CapsuleCollider>().enabled = false;
 
         for (int i = 0; i< 7; i++)
         {
@@ -83,20 +88,13 @@ public class Ennemy : MonoBehaviour
             }
         }
 
-        //Instantiate(cone, hitPosition, Quaternion.FromToRotation(-Vector3.forward, transform.position -  hitPosition));
-        Vector3 a = hitPosition + Vector3.Normalize(hitPosition - rayOrigin) * 5;
-        Instantiate(cone, hitPosition, Quaternion.FromToRotation(-Vector3.forward, a - hitPosition));
+        Debug.Log(hitPosition + " " + rayOrigin);
+        myCone = Instantiate(cone, hitPosition, Quaternion.LookRotation((rayOrigin - hitPosition).normalized));
+        myHitPosition = hitPosition;
 
-        Collider[] colliders = Physics.OverlapSphere(hitPosition, 10);
+        StartCoroutine(explosion());
 
-        foreach(Collider hit in colliders)
-        {
-            Rigidbody rb = hit.GetComponent<Rigidbody>();
-            if(rb != null)
-            {
-                rb.AddExplosionForce(hitForce, hitPosition, explosionRadius, UpwardModifier);
-            }
-        }
+        
 
     }
 
@@ -107,13 +105,27 @@ public class Ennemy : MonoBehaviour
 
         piece.transform.position = transform.position - transform.localScale/2 + new Vector3(cubeScale * x, cubeScale * y, cubeScale * z);
         piece.transform.localScale = new Vector3(cubeScale, cubeScale, cubeScale);
-
-        if (!piece.GetComponent<Rigidbody>())
-        {
-            piece.AddComponent<Rigidbody>();
-            piece.GetComponent<Rigidbody>().mass = 0.2f;
-        }
+   
             piece.GetComponent<MeshRenderer>().material = playerMat;
+    }
+
+    IEnumerator explosion()
+    {
+        Debug.Log("d");
+        yield return new WaitForSeconds(0.1f);
+        Debug.Log("c");
+
+        foreach (Collider hit in myCone.GetComponent<ConeController>().colliderList)
+        {
+
+            hit.gameObject.AddComponent<Rigidbody>();
+            hit.gameObject.GetComponent<Rigidbody>().mass = 0.2f;
+            Rigidbody rb = hit.GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                rb.AddExplosionForce(hitForce, myHitPosition, explosionRadius, UpwardModifier);
+            }
+        }
     }
 
 }

@@ -51,7 +51,7 @@ public class Bullet : MonoBehaviour
     {
         if (collison.gameObject.CompareTag("Ennemy"))
         {
-            collison.gameObject.GetComponent<Ennemy>().TakeDamage(10, collison.GetContact(0).point);
+            collison.gameObject.GetComponent<Ennemy>().TakeDamage(10,Vector3.zero,Vector3.zero);
             Destroy(this.gameObject);
         }
     }

@@ -73,7 +73,8 @@ public class Blaster : MonoBehaviour
         lineRenderer.positionCount = 1;
         lineRenderer.SetPosition(0, fpsCam.transform.position);
 
-        float remainingLength = maxLength;
+        float remainingLength = maxLength;
+
         if (shoot)
         {
             GameObject newBullet = Instantiate(Bullet, FireStart.position, FireStart.rotation) as GameObject;
@@ -86,6 +87,7 @@ public class Blaster : MonoBehaviour
                 ++lineRenderer.positionCount;
                 lineRenderer.SetPosition(lineRenderer.positionCount - 1, hit.point);
                 remainingLength -= Vector3.Distance(ray.origin, hit.point);
+                Vector3 lastRayOrigin = ray.origin;
 
                 ray = new Ray(hit.point, Vector3.Reflect(ray.direction, hit.normal));
                 
@@ -100,11 +102,11 @@ public class Blaster : MonoBehaviour
                     );
                 }
 
-                /*if (hit.transform.GetComponent<Ennemy>() && shoot)
+                if (hit.transform.GetComponent<Ennemy>() && shoot)
                 {
-                    hit.transform.GetComponent<Ennemy>().TakeDamage(damage * (i+1), hit.point, ray.origin);
+                    hit.transform.GetComponent<Ennemy>().TakeDamage(damage * (i+1), hit.point, lastRayOrigin);
                     shoot = false;
-                }*/
+                }
             }
             else
             {
