@@ -110,13 +110,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 10
-  loadTime: 0.75
+  loadTime: 0.1
+  reloadTime: 3
+  elapsedReloadingTime: 0
   TileFadeInDuration: 0.5
   TileFadeOutDuration: 1.5
   loadingGauge: {fileID: 0}
   fpsCam: {fileID: 8905300546012156589}
   Helper: {fileID: 0}
-  reflections: 5
+  reflections: 4
   maxLength: 300
   FireStart: {fileID: 671415331959190661}
   Bullet: {fileID: 1170744857039610, guid: 75f2b948ef198bf46b2b055c4c804999, type: 3}

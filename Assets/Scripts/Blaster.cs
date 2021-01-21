@@ -10,13 +10,7 @@ public class Blaster : MonoBehaviour
     public float reloadTime = 3f;
     public float elapsedReloadingTime = 0;
 
-
-    public float TileFadeInDuration;
-    public float TileFadeOutDuration;
-
-
-
-    private float elapsedLoadingTime = 0f;
+    public float elapsedLoadingTime = 0f;
     public Slider loadingGauge = default;
     public Camera fpsCam;
     public Helper Helper;
@@ -52,7 +46,7 @@ public class Blaster : MonoBehaviour
 
     void Update()
     {
-        RaycastReflection();
+        
         LoadBlaster();
 
         /*Time.timeScale += (1f / 16) * Time.unscaledDeltaTime;
@@ -65,13 +59,13 @@ public class Blaster : MonoBehaviour
 
         if (Input.GetButtonDown("Fire1") && elapsedReloadingTime >= reloadTime)
         {
-            Time.timeScale = 0.05f;
-            Time.fixedDeltaTime = Time.timeScale * 0.2f;
+            
         }
 
         if (Input.GetButton("Fire1") && elapsedReloadingTime >= reloadTime)
         {
-            
+            Time.timeScale = 0.05f;
+            Time.fixedDeltaTime = Time.timeScale * 0.2f;
             GetComponentInParent<MouseLook>().mouseSensitivity = 1000;
             elapsedLoadingTime += Time.deltaTime;
 
@@ -84,11 +78,13 @@ public class Blaster : MonoBehaviour
                 elapsedLoadingTime = 0f;
                 shoot = true;
             }
+            RaycastReflection();
         }
         else
         {
+            ResetRay();
             Time.timeScale = 1f;
-            GetComponentInParent<MouseLook>().mouseSensitivity = 300;
+            GetComponentInParent<MouseLook>().mouseSensitivity = 50;
             loadingGauge.value = 0f;
             elapsedLoadingTime = 0f;
             elapsedReloadingTime += Time.deltaTime;
@@ -100,6 +96,8 @@ public class Blaster : MonoBehaviour
         ray = new Ray(fpsCam.transform.position, fpsCam.transform.forward);
         lineRenderer.positionCount = 1;
         lineRenderer.SetPosition(0, fpsCam.transform.position);
+        lineRenderer.startColor = Color.red;
+        lineRenderer.endColor = Color.red;
 
         float remainingLength = maxLength;
 
@@ -119,6 +117,12 @@ public class Blaster : MonoBehaviour
                 {
                     hit.collider.GetComponent<TileController>().touched = true;
                 }
+                if (hit.collider.gameObject.CompareTag("Ennemy"))
+                {
+                    lineRenderer.startColor = Color.green;
+                    lineRenderer.endColor = Color.green;
+                    break;
+                }
             }
             else
             {
@@ -126,6 +130,7 @@ public class Blaster : MonoBehaviour
                 lineRenderer.SetPosition(lineRenderer.positionCount - 1, ray.origin + ray.direction * remainingLength);
             }
         }
+
         if (shoot)
         {
             GameObject newBullet = Instantiate(Bullet, FireStart.position, FireStart.rotation) as GameObject;
@@ -138,6 +143,11 @@ public class Blaster : MonoBehaviour
             //newBullet.GetComponent<Bullet>().SetHits(hits);
             shoot = false;
         }
+    }
+
+    void ResetRay()
+    {
+        lineRenderer.positionCount = 0;
     }
 
 }

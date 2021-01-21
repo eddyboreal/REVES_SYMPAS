@@ -94,14 +94,15 @@ public class Ennemy : MonoBehaviour
             }
         }
 
-        Debug.Log(hitPosition + " " + rayOrigin);
+        /*Debug.Log(hitPosition + " " + rayOrigin);
         myCone = Instantiate(cone, hitPosition, Quaternion.LookRotation((rayOrigin - hitPosition).normalized));
         myCone2 = Instantiate(cone, hitPosition, Quaternion.LookRotation((rayOrigin - hitPosition).normalized));
         myCone2.transform.localScale += new Vector3(0.1f,0.1f,0.1f);
         myCone3 = Instantiate(cone, hitPosition, Quaternion.LookRotation((rayOrigin - hitPosition).normalized));
-        myCone3.transform.localScale += new Vector3(0.7f, 0.7f, 0.7f);
+        myCone3.transform.localScale += new Vector3(0.7f, 0.7f, 0.7f);*/
         myHitPosition = hitPosition;
         StartCoroutine(explosion());
+        //FastExplosion();
 
     }
 
@@ -119,23 +120,36 @@ public class Ennemy : MonoBehaviour
         piece.GetComponent<MeshRenderer>().material = playerMat;
     }
 
+    private void FastExplosion()
+    {
+        Collider[] colliders = Physics.OverlapSphere(myHitPosition, 10);
+        Material[] materials = new Material[3];
+        materials[0] = playerMat;
+        materials[1] = playerHitOrangeMat;
+        materials[2] = playerHitYellowMat;
+
+        foreach (Collider hit in colliders)
+        {
+            if (hit.tag == "Ennemy")
+            {
+                if (!hit.GetComponent<Rigidbody>())
+                {
+                    hit.gameObject.AddComponent<Rigidbody>();
+                    hit.gameObject.GetComponent<Rigidbody>().mass = 0.2f;
+                }
+                Rigidbody rb = hit.GetComponent<Rigidbody>();
+                if (rb != null)
+                {
+                    hit.gameObject.GetComponent<MeshRenderer>().material = materials[Random.Range(0, materials.Length)];
+                    rb.AddExplosionForce(hitForce, myHitPosition, explosionRadius, UpwardModifier);
+                }
+            }
+        }
+    }
+
     IEnumerator explosion()
     {
-        Debug.Log("d");
-        yield return new WaitForSeconds(0.01f);
-        Debug.Log("c");
-
-        /*foreach (Collider hit in myCone3.GetComponent<ConeController>().colliderList)
-        {
-
-            hit.gameObject.GetComponent<MeshRenderer>().material = playerHitOrangeMat;
-        }
-
-        foreach (Collider hit in myCone2.GetComponent<ConeController>().colliderList)
-        {
-
-            hit.gameObject.GetComponent<MeshRenderer>().material = playerHitYellowMat;
-        }*/
+        yield return new WaitForSeconds(0.1f);
 
         Collider[] colliders = Physics.OverlapSphere(myHitPosition, 10);
         Material[] materials = new Material[3];
@@ -160,7 +174,9 @@ public class Ennemy : MonoBehaviour
                 }
             }
         }
-            
+
+        
+
     }
 
 }

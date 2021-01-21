@@ -43,3 +43,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 371c4d4b922875748a5d2e78a76fb897, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  TileFadeInDuration: 0.2
+  TileFadeOutDuration: 1.2

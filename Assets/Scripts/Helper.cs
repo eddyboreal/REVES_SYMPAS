@@ -17,6 +17,9 @@ public class Helper : MonoBehaviour
     public float TileFadeInDuration;
     public float TileFadeOutDuration;
 
+    public Material blackMaterial;
+    public Material whiteMaterial;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -42,17 +45,22 @@ public class Helper : MonoBehaviour
 
     IEnumerator FadeColorCoroutine(MeshRenderer meshRenderer, Color startColor, Color endColor, float fadeInDuration,float fadeOutDuration)
     {
+        Debug.Log("fade");
+        meshRenderer.material = whiteMaterial;
 
-        for(float a =0; a <= fadeInDuration; a+= Time.deltaTime)
+        for (float a =0; a <= fadeInDuration; a+= Time.deltaTime)
         {
-            meshRenderer.material.color = Color.Lerp(startColor, endColor, a/fadeInDuration);
+            //meshRenderer.material.SetFloat("Threshold", a);
+            meshRenderer.material.color = Color.Lerp(Color.black, Color.white, a/fadeInDuration);
             yield return null;
         }
 
         for (float b = 0; b <= fadeOutDuration; b += Time.deltaTime)
         {
-            meshRenderer.material.color = Color.Lerp(endColor, startColor, b/fadeOutDuration);
+            //meshRenderer.material.SetFloat("Threshold", b);
+            meshRenderer.material.color = Color.Lerp(Color.white, Color.black, b/fadeOutDuration);
             yield return null;
         }
+        meshRenderer.material = blackMaterial;
     }
 }

@@ -85,7 +85,6 @@ public class Bullet : MonoBehaviour
             }
             else
             {
-                Debug.Log(collider.gameObject.transform.position);
 
                 ++hitIndex;
 
@@ -95,7 +94,6 @@ public class Bullet : MonoBehaviour
 
                     Quaternion rotation = Quaternion.LookRotation(relativePos, Vector3.up);
                     transform.rotation = rotation;
-                    Debug.Log("a");
                 }
 
                 if (hitIndex >= transforms.Length)
