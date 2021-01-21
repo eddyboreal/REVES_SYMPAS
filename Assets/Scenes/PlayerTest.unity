@@ -1879,81 +1879,6 @@ PrefabInstance:
       propertyPath: fireStart
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 8905300545886937406, guid: 7b5b74b76d81dce4a954ebb87e9ca1af,
-        type: 3}
-      propertyPath: FireStart
-      value: 
-      objectReference: {fileID: 8905300547869518291}
-    - target: {fileID: 8905300545886937406, guid: 7b5b74b76d81dce4a954ebb87e9ca1af,
-        type: 3}
-      propertyPath: loadTime
-      value: 0.75
-      objectReference: {fileID: 0}
-    - target: {fileID: 8905300545886937407, guid: 7b5b74b76d81dce4a954ebb87e9ca1af,
-        type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: f00425f3bf944d64ea6e44f8463e641b, type: 2}
-    - target: {fileID: 8905300545886937407, guid: 7b5b74b76d81dce4a954ebb87e9ca1af,
-        type: 3}
-      propertyPath: m_Parameters.colorGradient.key0.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8905300545886937407, guid: 7b5b74b76d81dce4a954ebb87e9ca1af,
-        type: 3}
-      propertyPath: m_Parameters.colorGradient.key0.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8905300545886937407, guid: 7b5b74b76d81dce4a954ebb87e9ca1af,
-        type: 3}
-      propertyPath: m_Parameters.colorGradient.key0.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8905300545886937407, guid: 7b5b74b76d81dce4a954ebb87e9ca1af,
-        type: 3}
-      propertyPath: m_Parameters.colorGradient.m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8905300545886937407, guid: 7b5b74b76d81dce4a954ebb87e9ca1af,
-        type: 3}
-      propertyPath: m_Parameters.colorGradient.ctime0
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8905300545886937407, guid: 7b5b74b76d81dce4a954ebb87e9ca1af,
-        type: 3}
-      propertyPath: m_Parameters.colorGradient.key1.r
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8905300545886937407, guid: 7b5b74b76d81dce4a954ebb87e9ca1af,
-        type: 3}
-      propertyPath: m_Parameters.colorGradient.key1.g
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8905300545886937407, guid: 7b5b74b76d81dce4a954ebb87e9ca1af,
-        type: 3}
-      propertyPath: m_Parameters.colorGradient.key1.b
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8905300545886937407, guid: 7b5b74b76d81dce4a954ebb87e9ca1af,
-        type: 3}
-      propertyPath: m_Parameters.alignment
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8905300545886937407, guid: 7b5b74b76d81dce4a954ebb87e9ca1af,
-        type: 3}
-      propertyPath: m_Parameters.textureMode
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8905300545886937407, guid: 7b5b74b76d81dce4a954ebb87e9ca1af,
-        type: 3}
-      propertyPath: m_Parameters.shadowBias
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8905300545886937407, guid: 7b5b74b76d81dce4a954ebb87e9ca1af,
-        type: 3}
-      propertyPath: m_ReceiveShadows
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8905300546012156590, guid: 7b5b74b76d81dce4a954ebb87e9ca1af,
         type: 3}
       propertyPath: m_Layer
@@ -2041,9 +1966,3 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7b5b74b76d81dce4a954ebb87e9ca1af, type: 3}
---- !u!4 &8905300547869518291 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 671415331959190661, guid: 7b5b74b76d81dce4a954ebb87e9ca1af,
-    type: 3}
-  m_PrefabInstance: {fileID: 8905300547869518290}
-  m_PrefabAsset: {fileID: 0}
