@@ -94,14 +94,15 @@ public class Ennemy : MonoBehaviour
             }
         }
 
-        Debug.Log(hitPosition + " " + rayOrigin);
+        /*Debug.Log(hitPosition + " " + rayOrigin);
         myCone = Instantiate(cone, hitPosition, Quaternion.LookRotation((rayOrigin - hitPosition).normalized));
         myCone2 = Instantiate(cone, hitPosition, Quaternion.LookRotation((rayOrigin - hitPosition).normalized));
         myCone2.transform.localScale += new Vector3(0.1f,0.1f,0.1f);
         myCone3 = Instantiate(cone, hitPosition, Quaternion.LookRotation((rayOrigin - hitPosition).normalized));
-        myCone3.transform.localScale += new Vector3(0.7f, 0.7f, 0.7f);
+        myCone3.transform.localScale += new Vector3(0.7f, 0.7f, 0.7f);*/
         myHitPosition = hitPosition;
         StartCoroutine(explosion());
+        //FastExplosion();
 
     }
 
@@ -109,43 +110,73 @@ public class Ennemy : MonoBehaviour
     {
         GameObject piece;
         piece = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        piece.tag = "Ennemy";
 
         piece.transform.position = transform.position - transform.localScale/2 + new Vector3(cubeScale * x, cubeScale * y, cubeScale * z);
         piece.transform.localScale = new Vector3(cubeScale, cubeScale, cubeScale);
+
+        //piece.transform.parent = transform;
    
         piece.GetComponent<MeshRenderer>().material = playerMat;
     }
 
-    IEnumerator explosion()
+    private void FastExplosion()
     {
-        Debug.Log("d");
-        yield return new WaitForSeconds(0.1f);
-        Debug.Log("c");
+        Collider[] colliders = Physics.OverlapSphere(myHitPosition, 10);
+        Material[] materials = new Material[3];
+        materials[0] = playerMat;
+        materials[1] = playerHitOrangeMat;
+        materials[2] = playerHitYellowMat;
 
-        foreach (Collider hit in myCone3.GetComponent<ConeController>().colliderList)
+        foreach (Collider hit in colliders)
         {
-
-            hit.gameObject.GetComponent<MeshRenderer>().material = playerHitOrangeMat;
-        }
-
-        foreach (Collider hit in myCone2.GetComponent<ConeController>().colliderList)
-        {
-
-            hit.gameObject.GetComponent<MeshRenderer>().material = playerHitYellowMat;
-        }
-
-        foreach (Collider hit in myCone.GetComponent<ConeController>().colliderList)
-        {
-
-            hit.gameObject.AddComponent<Rigidbody>();
-            hit.gameObject.GetComponent<Rigidbody>().mass = 0.2f;
-            Rigidbody rb = hit.GetComponent<Rigidbody>();
-            if (rb != null)
+            if (hit.tag == "Ennemy")
             {
-                rb.AddExplosionForce(hitForce, myHitPosition, explosionRadius, UpwardModifier);
-                hit.isTrigger = true;
+                if (!hit.GetComponent<Rigidbody>())
+                {
+                    hit.gameObject.AddComponent<Rigidbody>();
+                    hit.gameObject.GetComponent<Rigidbody>().mass = 0.2f;
+                }
+                Rigidbody rb = hit.GetComponent<Rigidbody>();
+                if (rb != null)
+                {
+                    hit.gameObject.GetComponent<MeshRenderer>().material = materials[Random.Range(0, materials.Length)];
+                    rb.AddExplosionForce(hitForce, myHitPosition, explosionRadius, UpwardModifier);
+                }
             }
         }
+    }
+
+    IEnumerator explosion()
+    {
+        yield return new WaitForSeconds(0.1f);
+
+        Collider[] colliders = Physics.OverlapSphere(myHitPosition, 10);
+        Material[] materials = new Material[3];
+        materials[0] = playerMat;
+        materials[1] = playerHitOrangeMat;
+        materials[2] = playerHitYellowMat;
+
+        foreach (Collider hit in colliders)
+        {
+            if(hit.tag == "Ennemy")
+            {
+                if (!hit.GetComponent<Rigidbody>())
+                {
+                    hit.gameObject.AddComponent<Rigidbody>();
+                    hit.gameObject.GetComponent<Rigidbody>().mass = 0.2f;
+                }
+                Rigidbody rb = hit.GetComponent<Rigidbody>();
+                if (rb != null)
+                {
+                    hit.gameObject.GetComponent<MeshRenderer>().material = materials[Random.Range(0, materials.Length)];
+                    rb.AddExplosionForce(hitForce, myHitPosition, explosionRadius, UpwardModifier);
+                }
+            }
+        }
+
+        
+
     }
 
 }

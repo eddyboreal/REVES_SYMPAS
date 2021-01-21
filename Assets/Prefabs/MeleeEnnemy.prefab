@@ -176,9 +176,11 @@ MonoBehaviour:
   Distance: 0
   StartRaycastingDistance: 15
   playerMat: {fileID: 2100000, guid: 0d7f64799d1acab4a898129f6146ca42, type: 2}
+  playerHitOrangeMat: {fileID: 2100000, guid: f84d85d0aa50f3f40b3f2b626469bbb9, type: 2}
+  playerHitYellowMat: {fileID: 2100000, guid: c0de68d4c54ef224f8fe5413043b0628, type: 2}
   cubeScale: 0.2
   hitForce: 100
   explosionRadius: 10
   UpwardModifier: 0
-  cone: {fileID: 6193397641913420517, guid: 504dee4402ae45f46b308ad6bd700770, type: 3}
+  cone: {fileID: 9044261540970640918, guid: 504dee4402ae45f46b308ad6bd700770, type: 3}
   SuicideDistance: 3.5

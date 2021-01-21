@@ -46,7 +46,7 @@ public class Bullet : MonoBehaviour
     {
         if(hitIndex < transforms.Length)
         {         
-            transform.position = Vector3.MoveTowards(transform.position, transforms[hitIndex], 0.25f); 
+            transform.position = Vector3.MoveTowards(transform.position, transforms[hitIndex], 2f); 
         }
 
         
@@ -75,17 +75,16 @@ public class Bullet : MonoBehaviour
                 Debug.Log("Player triggers " + collider.transform.name);
                 if (hitIndex == 0)
                 {
-                    collider.gameObject.GetComponent<Ennemy>().TakeDamage(10, transforms[hitIndex], originCamPosition);
+                    collider.gameObject.GetComponent<Ennemy>().TakeDamage(10 * (hitIndex + 1), transforms[hitIndex], originCamPosition);
                 }
                 else
                 {
-                    collider.gameObject.GetComponent<Ennemy>().TakeDamage(10, transforms[hitIndex], transforms[hitIndex - 1]);
+                    collider.gameObject.GetComponent<Ennemy>().TakeDamage(10 * (hitIndex +1), transforms[hitIndex], transforms[hitIndex - 1]);
                 }
                 Destroy(gameObject);
             }
             else
             {
-                Debug.Log(collider.gameObject.transform.position);
 
                 ++hitIndex;
 
@@ -95,7 +94,6 @@ public class Bullet : MonoBehaviour
 
                     Quaternion rotation = Quaternion.LookRotation(relativePos, Vector3.up);
                     transform.rotation = rotation;
-                    Debug.Log("a");
                 }
 
                 if (hitIndex >= transforms.Length)
