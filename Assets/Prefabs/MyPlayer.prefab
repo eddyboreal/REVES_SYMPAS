@@ -119,6 +119,8 @@ MonoBehaviour:
   reflections: 5
   maxLength: 300
   FireStart: {fileID: 671415331959190661}
+  Bullet: {fileID: 0}
+  speed: 50
 --- !u!1 &8905300546012156590
 GameObject:
   m_ObjectHideFlags: 0
@@ -486,6 +488,11 @@ PrefabInstance:
     - target: {fileID: 4826450088584990, guid: 119551172e2002344983c075ab97ef79, type: 3}
       propertyPath: m_LocalScale.z
       value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 735884289094946134, guid: 119551172e2002344983c075ab97ef79,
+        type: 3}
+      propertyPath: m_TagString
+      value: FireStart
       objectReference: {fileID: 0}
     - target: {fileID: 8269914060712132174, guid: 119551172e2002344983c075ab97ef79,
         type: 3}

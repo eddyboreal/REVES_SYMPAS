@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using GAP_ParticleSystemController;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -43,11 +44,11 @@ public class LaserScript : MonoBehaviour {
 
 		//COLOR - changes color according to ParticleSystemController
 		psCtrl = GetComponent<ParticleSystemController>();
-		if(psCtrl != null && psCtrl.changeColor){
+		/*if(psCtrl != null && psCtrl.changeColor){
 			for(int i = 0; i< lineRenderers.Count; i++){
 				lineRenderers [i].colorGradient = psCtrl.ChangeGradientColor (lineRenderers [i].colorGradient, psCtrl.newMaxColor);
 			}
-		}
+		}*/
 
 		//add particle systems to a respective list
 		if (endVFX != null) {

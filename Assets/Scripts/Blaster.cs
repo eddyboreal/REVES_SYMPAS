@@ -27,6 +27,9 @@ public class Blaster : MonoBehaviour
 
     public Transform FireStart;
 
+    public GameObject Bullet;
+    public float speed = 50f;
+
     void Awake()
     {
         lineRenderer = GetComponent<LineRenderer>();
@@ -66,11 +69,16 @@ public class Blaster : MonoBehaviour
 
     void RaycastReflection()
     {
-        ray = new Ray(FireStart.position, FireStart.forward);
+        ray = new Ray(fpsCam.transform.position, fpsCam.transform.forward);
         lineRenderer.positionCount = 1;
-        lineRenderer.SetPosition(0, FireStart.position);
+        lineRenderer.SetPosition(0, fpsCam.transform.position);
 
         float remainingLength = maxLength;
+
+        if (shoot)
+        {
+            GameObject newBullet = Instantiate(Bullet, FireStart.position, FireStart.rotation) as GameObject;
+        }
 
         for (int i = 0; i < reflections; ++i)
         {
