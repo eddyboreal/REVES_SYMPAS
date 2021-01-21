@@ -4994,7 +4994,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.05, y: 0.05, z: 0.05}
+  m_Size: {x: 0.0000001, y: 0.0000001, z: 0.0000001}
   m_Center: {x: 0, y: 0, z: 1.22}
 --- !u!54 &54526025840063382
 Rigidbody:
@@ -5028,6 +5028,8 @@ MonoBehaviour:
   rb: {fileID: 54526025840063382}
   Camera: {fileID: 0}
   FireStart: {fileID: 0}
+  originCamPosition: {x: 0, y: 0, z: 0}
+  transforms: []
 --- !u!1 &1355984127163962
 GameObject:
   m_ObjectHideFlags: 0

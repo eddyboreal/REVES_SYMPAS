@@ -101,12 +101,6 @@ public class Blaster : MonoBehaviour
                         TileFadeOutDuration
                     );
                 }
-
-                if (hit.transform.GetComponent<Ennemy>() && shoot)
-                {
-                    hit.transform.GetComponent<Ennemy>().TakeDamage(damage * (i+1), hit.point, lastRayOrigin);
-                    shoot = false;
-                }
             }
             else
             {
@@ -118,6 +112,7 @@ public class Blaster : MonoBehaviour
         {
             GameObject newBullet = Instantiate(Bullet, FireStart.position, FireStart.rotation) as GameObject;
             newBullet.GetComponent<Bullet>().transforms = new Vector3[hits.Length];
+            newBullet.GetComponent<Bullet>().originCamPosition = fpsCam.transform.position;
             for (int i = 0; i < hits.Length; ++i)
             {
                 newBullet.GetComponent<Bullet>().transforms[i] = hits[i].point;
