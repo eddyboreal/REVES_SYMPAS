@@ -17,6 +17,8 @@ public class Ennemy : MonoBehaviour
     public float explosionRadius;
     public float UpwardModifier;
 
+    public GameObject cone;
+
     RaycastHit hit;
 
     protected virtual void Awake()
@@ -81,6 +83,8 @@ public class Ennemy : MonoBehaviour
             }
         }
 
+        Instantiate(cone, hitPosition, Quaternion.FromToRotation(-Vector3.forward, transform.position - hitPosition));
+        
         Collider[] colliders = Physics.OverlapSphere(hitPosition, 10);
 
         foreach(Collider hit in colliders)

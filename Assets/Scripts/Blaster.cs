@@ -84,7 +84,6 @@ public class Blaster : MonoBehaviour
                 
                 if (hit.collider.gameObject.CompareTag("Tile") && shoot)
                 {
-                    
                     Helper.FadeColor(
                         hit.collider.gameObject.GetComponent<MeshRenderer>(), 
                         hit.collider.gameObject.GetComponent<MeshRenderer>().material.color, 
