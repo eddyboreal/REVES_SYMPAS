@@ -21,7 +21,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         is_grounded = Physics.CheckSphere(GroundCheck.position, ground_distance, GroundMask);
-
+        Debug.Log("Grounded " + is_grounded);
         if(is_grounded && velocity.y < 0f)
         {
             //force Player to the ground
@@ -37,6 +37,7 @@ public class PlayerMovement : MonoBehaviour
 
         if(Input.GetButtonDown("Jump") && is_grounded)
         {
+            Debug.Log("Jump");
             velocity.y = Mathf.Sqrt(jump_height * -2f * gravity);
         }
 
