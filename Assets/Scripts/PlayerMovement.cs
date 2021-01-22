@@ -18,6 +18,12 @@ public class PlayerMovement : MonoBehaviour
     bool is_grounded;
 
     Vector3 velocity;
+
+    private void Start()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
     void Update()
     {
         is_grounded = Physics.CheckSphere(GroundCheck.position, ground_distance, GroundMask);

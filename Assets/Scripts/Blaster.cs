@@ -64,7 +64,7 @@ public class Blaster : MonoBehaviour
 
         if (Input.GetButton("Fire1") && elapsedReloadingTime >= reloadTime)
         {
-            Time.timeScale = 0.05f;
+            Time.timeScale = 0.1f;
             Time.fixedDeltaTime = Time.timeScale * 0.2f;
             GetComponentInParent<MouseLook>().mouseSensitivity = 1000;
             elapsedLoadingTime += Time.deltaTime;
