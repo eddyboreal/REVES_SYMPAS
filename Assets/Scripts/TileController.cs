@@ -26,10 +26,13 @@ public class TileController : MonoBehaviour
             Helper helper = GameObject.FindGameObjectWithTag("Helper").GetComponent<Helper>();
             helper.FadeColor(
                         gameObject.GetComponent<MeshRenderer>(),
-                        gameObject.GetComponent<MeshRenderer>().material.color,
-                        helper.colors.possibleColors[Random.Range(0, helper.colors.possibleColors.Length - 1)],
+                        Color.black,
+                        Color.white,
+                        Color.white,
+                        Color.black,
                         helper.TileFadeInDuration,
-                        helper.TileFadeOutDuration
+                        helper.TileFadeOutDuration,
+                        true
                     );
             touched = false;
         }

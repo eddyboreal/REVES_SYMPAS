@@ -51,6 +51,10 @@ public class Ennemy : MonoBehaviour
         {
             Die(hitPosition, rayOrigin);
         }
+        else
+        {
+            changeColor(health);
+        }
     }
 
     public virtual void Die(Vector3 hitPosition, Vector3 rayOrigin)
@@ -64,7 +68,7 @@ public class Ennemy : MonoBehaviour
         followingPlayer = true;
     }
 
-        public bool PlayerOnSight()
+    public bool PlayerOnSight()
     {
         Debug.DrawRay(transform.position, GetComponent<Ennemy>().player.transform.position - transform.position);
         if (Physics.Raycast(transform.position, player.transform.position - transform.position, out hit))
@@ -109,8 +113,8 @@ public class Ennemy : MonoBehaviour
         piece.transform.localScale = new Vector3(cubeScale, cubeScale, cubeScale);
 
         //piece.transform.parent = transform;
-   
-        piece.GetComponent<MeshRenderer>().material = playerMat;
+
+        piece.GetComponent<MeshRenderer>().material = gameObject.GetComponent<MeshRenderer>().material ;
     }
 
     IEnumerator explosion()
@@ -143,6 +147,37 @@ public class Ennemy : MonoBehaviour
 
         
 
+    }
+
+    void changeColor(float health)
+    {
+        Helper helper = GameObject.FindGameObjectWithTag("Helper").GetComponent<Helper>();
+        Color32 actualColor = GetComponent<MeshRenderer>().material.color;
+        Color32 glowColor = Color.white;
+        Color32 colorToReach = new Color();
+        
+        switch (health)
+        {
+            case 20:
+                colorToReach = new Color32(250, 110, 32, 255);
+                //<MeshRenderer>().material.color = new Color32(250, 110, 32, 255);
+               break;
+          case 10:
+                colorToReach = new Color32(213, 52, 52, 255);
+                //GetComponent<MeshRenderer>().material.color = new Color32(213, 52, 52, 255);
+                break;
+        }
+        
+        helper.FadeColor(
+                    gameObject.GetComponent<MeshRenderer>(),
+                    actualColor,
+                    glowColor,
+                    glowColor,
+                    colorToReach,
+                    0.5f,
+                    0.5f,
+                    false
+                );
     }
 
 }

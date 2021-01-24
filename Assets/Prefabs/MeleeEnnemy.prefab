@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 523c9e06fb43a2443a10818fc0ec290a, type: 2}
+  - {fileID: 2100000, guid: 0846a720e664cc64abe88788261a5718, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -154,7 +154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f20179f9570b2544daa445cb6972af5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 10
+  health: 30
   damageDone: 10
   player: {fileID: 0}
   waitDetectionToFollow: 1
