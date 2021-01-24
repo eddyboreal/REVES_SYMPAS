@@ -37,29 +37,35 @@ public class Helper : MonoBehaviour
         
     }   
 
-    public void FadeColor(MeshRenderer meshRenderer, Color startColor, Color endColor, float fadeInDuration, float fadeOutDuration)
+    public void FadeColor(MeshRenderer meshRenderer, Color startColor1, Color endColor1, Color startColor2, Color endColor2, float fadeInDuration, float fadeOutDuration, bool tile)
     {
-        StartCoroutine(FadeColorCoroutine(meshRenderer, startColor, endColor, fadeInDuration, fadeOutDuration));
+        StartCoroutine(FadeColorCoroutine(meshRenderer, startColor1, endColor1, startColor2, endColor2, fadeInDuration, fadeOutDuration, tile));
     }
 
 
-    IEnumerator FadeColorCoroutine(MeshRenderer meshRenderer, Color startColor, Color endColor, float fadeInDuration,float fadeOutDuration)
+    IEnumerator FadeColorCoroutine(MeshRenderer meshRenderer, Color startColor1, Color endColor1, Color startColor2, Color endColor2, float fadeInDuration, float fadeOutDuration, bool tile)
     {
-        meshRenderer.material = whiteMaterial;
+        if (tile)
+        {
+            meshRenderer.material = whiteMaterial;
+        }
 
         for (float a =0; a <= fadeInDuration; a+= Time.deltaTime)
         {
-            //meshRenderer.material.SetFloat("Threshold", a);
-            meshRenderer.material.color = Color.Lerp(Color.black, Color.white, a/fadeInDuration);
+            meshRenderer.material.color = Color.Lerp(startColor1, endColor1, a/fadeInDuration);
             yield return null;
         }
 
         for (float b = 0; b <= fadeOutDuration; b += Time.deltaTime)
         {
-            //meshRenderer.material.SetFloat("Threshold", b);
-            meshRenderer.material.color = Color.Lerp(Color.white, Color.black, b/fadeOutDuration);
+            meshRenderer.material.color = Color.Lerp(startColor2, endColor2, b/fadeOutDuration);
             yield return null;
         }
-        meshRenderer.material = blackMaterial;
+
+        if (tile)
+        {
+            meshRenderer.material = blackMaterial;
+        }
+
     }
 }
