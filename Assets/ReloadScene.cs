@@ -11,7 +11,7 @@ public class ReloadScene : MonoBehaviour
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Tab))
         {
             #if UNITY_EDITOR
                         UnityEditor.EditorApplication.isPlaying = false;

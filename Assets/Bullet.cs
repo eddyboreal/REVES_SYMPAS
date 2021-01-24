@@ -44,11 +44,11 @@ public class Bullet : MonoBehaviour
 
     void Update()
     {
-        if(hitIndex < transforms.Length)
+        
+        if (hitIndex < transforms.Length)
         {         
             transform.position = Vector3.MoveTowards(transform.position, transforms[hitIndex], 2f); 
         }
-
         
     }
 
@@ -68,24 +68,28 @@ public class Bullet : MonoBehaviour
 
     void OnTriggerEnter(Collider collider)
     {
-        if(frameCount != Time.frameCount)
+
+        Debug.Log(collider.gameObject.name);
+
+        if (collider.gameObject.CompareTag("Ennemy"))
         {
-            if (collider.gameObject.CompareTag("Ennemy"))
+            if (hitIndex == 0)
             {
-                Debug.Log("Player triggers " + collider.transform.name);
-                if (hitIndex == 0)
-                {
-                    collider.gameObject.GetComponent<Ennemy>().TakeDamage(10 * (hitIndex + 1), transforms[hitIndex], originCamPosition);
-                }
-                else
-                {
-                    collider.gameObject.GetComponent<Ennemy>().TakeDamage(10 * (hitIndex +1), transforms[hitIndex], transforms[hitIndex - 1]);
-                }
-                Destroy(gameObject);
+                collider.gameObject.GetComponent<Ennemy>().TakeDamage(10 * (hitIndex + 1), transforms[hitIndex], originCamPosition);
             }
             else
             {
+                collider.gameObject.GetComponent<Ennemy>().TakeDamage(10 * (hitIndex + 1), transforms[hitIndex], transforms[hitIndex - 1]);
+            }
+            Destroy(gameObject);
+        }
 
+        if (frameCount != Time.frameCount)
+        {
+            
+            if (!collider.gameObject.CompareTag("Ennemy"))
+            {
+                
                 ++hitIndex;
 
                 if (hitIndex < transforms.Length)
@@ -108,20 +112,6 @@ public class Bullet : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        /*if (collision.gameObject.tag == "Player" || collision.gameObject.tag == "FireStart" || collision.gameObject.CompareTag("Ennemy"))
-        {
-            Debug.Log("Player collides " + collision.transform.name);
-            Physics.IgnoreCollision(collision.gameObject.GetComponent<Collider>(), GetComponent<Collider>());
-        }
-        else
-        {
-            //Ray ray = new Ray(collision.GetContact(0).point, Vector3.Reflect(transform.position, collision.GetContact(0).normal));
-
-            SetDirection(Vector3.Reflect(transform.position, collision.GetContact(0).normal).normalized);
-            rb.velocity = Vector3.zero;
-            rb.velocity = direction * speed;
-
-            Debug.Log(rb.velocity);
-        }*/
+        
     }
 }

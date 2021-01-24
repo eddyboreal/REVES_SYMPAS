@@ -11,11 +11,12 @@ GameObject:
   - component: {fileID: 3076499699800474064}
   - component: {fileID: 3076499699800474065}
   - component: {fileID: 3076499699800474070}
-  - component: {fileID: 3076499699800474071}
   - component: {fileID: 3076499699800474068}
   - component: {fileID: 3076499699800474069}
   - component: {fileID: 3076499699800474066}
   - component: {fileID: 3076499699800474067}
+  - component: {fileID: 3076499699800474071}
+  - component: {fileID: 1357373065331429542}
   m_Layer: 0
   m_Name: MeleeEnnemy
   m_TagString: Untagged
@@ -84,20 +85,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!136 &3076499699800474071
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3076499699800474074}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 1.2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &3076499699800474068
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -184,3 +171,30 @@ MonoBehaviour:
   UpwardModifier: 0
   cone: {fileID: 9044261540970640918, guid: 504dee4402ae45f46b308ad6bd700770, type: 3}
   SuicideDistance: 3.5
+--- !u!136 &3076499699800474071
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3076499699800474074}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 1.2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &1357373065331429542
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3076499699800474074}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.99999994, y: 0.99999994, z: 0.99999994}
+  m_Center: {x: 0, y: 0, z: 0}

@@ -21,7 +21,6 @@ public class TestNegative : MonoBehaviour
             a += Time.deltaTime;
             if(a <= 1)
             {
-                Debug.Log("a");
                 GetComponent<MeshRenderer>().material.SetFloat("_Threshold", a);
             }
             else 
@@ -36,7 +35,6 @@ public class TestNegative : MonoBehaviour
             b -= Time.deltaTime;
             if (b >= 0)
             {
-                Debug.Log("b");
                 GetComponent<MeshRenderer>().material.SetFloat("_Threshold", b);
             }
             else

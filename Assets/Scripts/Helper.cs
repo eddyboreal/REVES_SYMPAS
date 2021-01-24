@@ -45,7 +45,6 @@ public class Helper : MonoBehaviour
 
     IEnumerator FadeColorCoroutine(MeshRenderer meshRenderer, Color startColor, Color endColor, float fadeInDuration,float fadeOutDuration)
     {
-        Debug.Log("fade");
         meshRenderer.material = whiteMaterial;
 
         for (float a =0; a <= fadeInDuration; a+= Time.deltaTime)

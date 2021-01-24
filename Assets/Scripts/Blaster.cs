@@ -31,7 +31,7 @@ public class Blaster : MonoBehaviour
     public GameObject Bullet;
     public float speed = 50f;
 
-    int PlayerMask = 1 << 9;
+    int raycastIgnoredLayers = ~( (1 << 9) | (1 << 11));        // Ignores Layer 9 and 11
 
     void Awake()
     {
@@ -41,7 +41,6 @@ public class Blaster : MonoBehaviour
 
         hits = new RaycastHit[reflections];
 
-        PlayerMask = ~PlayerMask;
     }
 
     void Update()
@@ -56,11 +55,6 @@ public class Blaster : MonoBehaviour
     void LoadBlaster()
     {
         shoot = false;
-
-        if (Input.GetButtonDown("Fire1") && elapsedReloadingTime >= reloadTime)
-        {
-            
-        }
 
         if (Input.GetButton("Fire1") && elapsedReloadingTime >= reloadTime)
         {
@@ -103,7 +97,7 @@ public class Blaster : MonoBehaviour
 
         for (int i = 0; i < reflections; ++i)
         {
-            if (Physics.Raycast(ray.origin, ray.direction, out hit, remainingLength, PlayerMask))
+            if (Physics.Raycast(ray.origin, ray.direction, out hit, remainingLength, raycastIgnoredLayers))
             {
                 hits[i] = hit;
                 ++lineRenderer.positionCount;
