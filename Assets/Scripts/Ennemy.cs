@@ -115,7 +115,7 @@ public class Ennemy : MonoBehaviour
 
     IEnumerator explosion()
     {
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.1f * Time.timeScale);
 
         Collider[] colliders = Physics.OverlapSphere(myHitPosition, 10);
         Material[] materials = new Material[3];
