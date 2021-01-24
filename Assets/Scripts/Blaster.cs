@@ -39,6 +39,8 @@ public class Blaster : MonoBehaviour
     public Canvas BulletTimeCanvas = default;
     private bool bulletTimeIn = true;
 
+    public Text BounceText = default;
+
     void Awake()
     {
         
@@ -63,16 +65,16 @@ public class Blaster : MonoBehaviour
     {
         shoot = false;
 
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1") || Input.GetAxisRaw("Fire1") >= 0.2f)
         {
             Time.timeScale = 0.1f;
             Time.fixedDeltaTime = Time.timeScale * 0.02f;
         }
 
-        if (Input.GetButton("Fire1") /*&& FireButtonPushed && elapsedReloadingTime >= reloadTime*/)
+        if (Input.GetButton("Fire1") || Input.GetAxisRaw("Fire1") >= 0.2f /*&& FireButtonPushed && elapsedReloadingTime >= reloadTime*/)
         {
             
-            GetComponentInParent<MouseLook>().mouseSensitivity = 1000;
+            GetComponentInParent<MouseLook>().mouseSensitivity = 1000f;
             elapsedLoadingTime += Time.unscaledDeltaTime;
 
             loadingGauge.value = elapsedLoadingTime / loadTime;
@@ -89,10 +91,12 @@ public class Blaster : MonoBehaviour
         }
         else
         {
+            BounceText.text = "0";
+            BounceText.color = Color.white;
             ResetRay();
             Time.timeScale = 1f;
             Time.fixedDeltaTime = Time.timeScale * 0.02f;
-            GetComponentInParent<MouseLook>().mouseSensitivity = 50;
+            GetComponentInParent<MouseLook>().mouseSensitivity = 50f;
             loadingGauge.value = 0f;
             elapsedLoadingTime = 0f;
             elapsedReloadingTime += Time.deltaTime;
@@ -101,6 +105,9 @@ public class Blaster : MonoBehaviour
 
     void RaycastReflection()
     {
+        bool ennemyEncountered = false;
+        int bounces = 0;
+
         ray = new Ray(fpsCam.transform.position, fpsCam.transform.forward);
         lineRenderer.positionCount = 1;
         lineRenderer.SetPosition(0, fpsCam.transform.position);
@@ -113,6 +120,7 @@ public class Blaster : MonoBehaviour
         {
             if (Physics.Raycast(ray.origin, ray.direction, out hit, remainingLength, raycastIgnoredLayers))
             {
+                ++bounces;
                 hits[i] = hit;
                 ++lineRenderer.positionCount;
                 lineRenderer.SetPosition(lineRenderer.positionCount - 1, hit.point);
@@ -129,6 +137,7 @@ public class Blaster : MonoBehaviour
                 {
                     lineRenderer.startColor = Color.green;
                     lineRenderer.endColor = Color.green;
+                    ennemyEncountered = true;
                     break;
                 }
             }
@@ -156,6 +165,17 @@ public class Blaster : MonoBehaviour
             //newBullet.GetComponent<Bullet>().SetHits(hits);
             shoot = false;
         }
+
+        BounceText.text = bounces.ToString();
+
+        if (ennemyEncountered)
+        {
+            BounceText.color = Color.green;
+        }
+        else if (!ennemyEncountered)
+        {
+            BounceText.color = Color.red;
+        }
     }
 
     void ResetRay()
@@ -165,7 +185,7 @@ public class Blaster : MonoBehaviour
     
     private void BulletTimeFade()
     {
-        if (Input.GetButton("Fire1"))
+        if (Input.GetButton("Fire1") || Input.GetAxisRaw("Fire1") >= 0.2f)
         {
             if (bulletTimeIn)
             {
@@ -174,7 +194,7 @@ public class Blaster : MonoBehaviour
                 bulletTimeIn = false;
             }
         }
-        else if (Input.GetButtonUp("Fire1"))
+        else if (Input.GetButtonUp("Fire1") || Input.GetAxisRaw("Fire1") < 0.2f)
         {
             if (!bulletTimeIn)
             {
