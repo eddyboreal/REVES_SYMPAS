@@ -13,10 +13,12 @@ public class Bullet : MonoBehaviour
     public Transform Camera;
     public Transform FireStart;
 
-    //public RaycastHit[] hits;
     public Vector3 originCamPosition;
     public Vector3[] transforms;
     private int hitIndex = 0;
+
+    public int EnnemyHitIndex = -1;
+    public GameObject Ennemy;
 
     private int frameCount = 0;
 
@@ -49,6 +51,13 @@ public class Bullet : MonoBehaviour
         {         
             transform.position = Vector3.MoveTowards(transform.position, transforms[hitIndex], 2f); 
         }
+
+        if(EnnemyHitIndex == hitIndex && Vector3.Distance(transform.position, transforms[hitIndex]) <= 1)
+        {
+            Ennemy.GetComponent<Ennemy>().TakeDamage(10 * (hitIndex + 1), transforms[hitIndex], originCamPosition);
+            Destroy(gameObject);
+        }
+
         
     }
 
@@ -68,7 +77,7 @@ public class Bullet : MonoBehaviour
 
     void OnTriggerEnter(Collider collider)
     {
-
+        /*
         Debug.Log(collider.gameObject.name);
 
         if (collider.gameObject.CompareTag("Ennemy"))
@@ -82,7 +91,7 @@ public class Bullet : MonoBehaviour
                 collider.gameObject.GetComponent<Ennemy>().TakeDamage(10 * (hitIndex + 1), transforms[hitIndex], transforms[hitIndex - 1]);
             }
             Destroy(gameObject);
-        }
+        }*/
 
         if (frameCount != Time.frameCount)
         {

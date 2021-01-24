@@ -133,6 +133,11 @@ public class Blaster : MonoBehaviour
             for (int i = 0; i < hits.Length; ++i)
             {
                 newBullet.GetComponent<Bullet>().transforms[i] = hits[i].point;
+                if (hits[i].collider.gameObject.CompareTag("Ennemy") && newBullet.GetComponent<Bullet>().EnnemyHitIndex == -1)
+                {
+                    newBullet.GetComponent<Bullet>().EnnemyHitIndex = i;
+                    newBullet.GetComponent<Bullet>().Ennemy = hits[i].collider.gameObject;
+                }
             }
             //newBullet.GetComponent<Bullet>().SetHits(hits);
             shoot = false;
