@@ -199,7 +199,7 @@ public class Blaster : MonoBehaviour
             if (!bulletTimeIn)
             {
                 StopAllCoroutines();
-                StartCoroutine(FadeCanvas(BulletTimeCanvas.GetComponent<CanvasGroup>(), BulletTimeCanvas.GetComponent<CanvasGroup>().alpha, 0f, 0.025f, true));
+                StartCoroutine(FadeCanvas(BulletTimeCanvas.GetComponent<CanvasGroup>(), BulletTimeCanvas.GetComponent<CanvasGroup>().alpha, 0f, 0.25f, true));
                 bulletTimeIn = true;
             }
         }
