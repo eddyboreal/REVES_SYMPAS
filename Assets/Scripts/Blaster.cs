@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(LineRenderer))]
@@ -35,6 +36,9 @@ public class Blaster : MonoBehaviour
 
     int raycastIgnoredLayers = ~( (1 << 9) | (1 << 11));        // Ignores Layer 9 and 11
 
+    public Canvas BulletTimeCanvas = default;
+    private bool bulletTimeIn = true;
+
     void Awake()
     {
         
@@ -49,6 +53,7 @@ public class Blaster : MonoBehaviour
     {
         
         LoadBlaster();
+        BulletTimeFade();
 
         /*Time.timeScale += (1f / 16) * Time.unscaledDeltaTime;
         Time.timeScale = Mathf.Clamp(Time.timeScale, 0f, 1f);*/
@@ -157,5 +162,61 @@ public class Blaster : MonoBehaviour
     {
         lineRenderer.positionCount = 0;
     }
+    
+    private void BulletTimeFade()
+    {
+        if (Input.GetButton("Fire1"))
+        {
+            if (bulletTimeIn)
+            {
+                StopAllCoroutines();
+                StartCoroutine(FadeCanvas(BulletTimeCanvas.GetComponent<CanvasGroup>(), BulletTimeCanvas.GetComponent<CanvasGroup>().alpha, 1f, 0.025f, true));
+                bulletTimeIn = false;
+            }
+        }
+        else if (Input.GetButtonUp("Fire1"))
+        {
+            if (!bulletTimeIn)
+            {
+                StopAllCoroutines();
+                StartCoroutine(FadeCanvas(BulletTimeCanvas.GetComponent<CanvasGroup>(), BulletTimeCanvas.GetComponent<CanvasGroup>().alpha, 0f, 0.025f, true));
+                bulletTimeIn = true;
+            }
+        }
+    }
 
+    public static IEnumerator FadeCanvas(CanvasGroup canvas, float startAlpha, float endAlpha, float duration, bool activate)
+    {
+        var startTime = Time.time;
+        var endTime = Time.time + duration;
+        var elapsedTime = 0f;
+
+        canvas.alpha = startAlpha;
+
+        if (activate)
+        {
+            canvas.gameObject.SetActive(true);
+        }
+
+        while (Time.time <= endTime)
+        {
+            elapsedTime = Time.time - startTime;
+            var percentage = 1 / (duration / elapsedTime);
+            if (startAlpha > endAlpha)
+            {
+                canvas.alpha = startAlpha - percentage;
+            }
+            else
+            {
+                canvas.alpha = startAlpha + percentage;
+            }
+            yield return new WaitForEndOfFrame();
+        }
+
+        canvas.alpha = endAlpha;
+        if (!activate)
+        {
+            canvas.gameObject.SetActive(false);
+        }
+    }
 }
