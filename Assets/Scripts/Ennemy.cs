@@ -125,7 +125,7 @@ public class Ennemy : MonoBehaviour
 
         foreach (Collider hit in colliders)
         {
-            if(hit.tag == "Ennemy")
+            if(hit.tag == "Ennemy" && hit.gameObject.layer == LayerMask.NameToLayer("IgnorePlayer"))
             {
                 if (!hit.GetComponent<Rigidbody>())
                 {
@@ -136,7 +136,7 @@ public class Ennemy : MonoBehaviour
                 if (rb != null)
                 {
                     hit.gameObject.GetComponent<MeshRenderer>().material = materials[Random.Range(0, materials.Length)];
-                    rb.AddExplosionForce(hitForce, myHitPosition, explosionRadius, UpwardModifier);
+                    rb.AddExplosionForce(hitForce * (1/Time.timeScale), myHitPosition, explosionRadius, UpwardModifier);;
                 }
             }
         }

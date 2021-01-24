@@ -31,6 +31,8 @@ public class Blaster : MonoBehaviour
     public GameObject Bullet;
     public float speed = 50f;
 
+    public bool FireButtonPushed = false;
+
     int raycastIgnoredLayers = ~( (1 << 9) | (1 << 11));        // Ignores Layer 9 and 11
 
     void Awake()
@@ -56,17 +58,23 @@ public class Blaster : MonoBehaviour
     {
         shoot = false;
 
-        if (Input.GetButton("Fire1") && elapsedReloadingTime >= reloadTime)
+        if (Input.GetButtonDown("Fire1"))
         {
             Time.timeScale = 0.1f;
-            Time.fixedDeltaTime = Time.timeScale * 0.2f;
+            Time.fixedDeltaTime = Time.timeScale * 0.02f;
+        }
+
+        if (Input.GetButton("Fire1") /*&& FireButtonPushed && elapsedReloadingTime >= reloadTime*/)
+        {
+            
             GetComponentInParent<MouseLook>().mouseSensitivity = 1000;
-            elapsedLoadingTime += Time.deltaTime;
+            elapsedLoadingTime += Time.unscaledDeltaTime;
 
             loadingGauge.value = elapsedLoadingTime / loadTime;
 
             if (elapsedLoadingTime >= loadTime)
             {
+                FireButtonPushed = false;
                 elapsedReloadingTime = 0f;
                 loadingGauge.value = 0f;
                 elapsedLoadingTime = 0f;
@@ -78,6 +86,7 @@ public class Blaster : MonoBehaviour
         {
             ResetRay();
             Time.timeScale = 1f;
+            Time.fixedDeltaTime = Time.timeScale * 0.02f;
             GetComponentInParent<MouseLook>().mouseSensitivity = 50;
             loadingGauge.value = 0f;
             elapsedLoadingTime = 0f;
