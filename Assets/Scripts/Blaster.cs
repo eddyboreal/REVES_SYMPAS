@@ -65,16 +65,16 @@ public class Blaster : MonoBehaviour
     {
         shoot = false;
 
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1") || Input.GetAxisRaw("Fire1") >= 0.2f)
         {
             Time.timeScale = 0.1f;
             Time.fixedDeltaTime = Time.timeScale * 0.02f;
         }
 
-        if (Input.GetButton("Fire1") /*&& FireButtonPushed && elapsedReloadingTime >= reloadTime*/)
+        if (Input.GetButton("Fire1") || Input.GetAxisRaw("Fire1") >= 0.2f /*&& FireButtonPushed && elapsedReloadingTime >= reloadTime*/)
         {
             
-            GetComponentInParent<MouseLook>().mouseSensitivity = 1000;
+            GetComponentInParent<MouseLook>().mouseSensitivity = 1000f;
             elapsedLoadingTime += Time.unscaledDeltaTime;
 
             loadingGauge.value = elapsedLoadingTime / loadTime;
@@ -96,7 +96,7 @@ public class Blaster : MonoBehaviour
             ResetRay();
             Time.timeScale = 1f;
             Time.fixedDeltaTime = Time.timeScale * 0.02f;
-            GetComponentInParent<MouseLook>().mouseSensitivity = 50;
+            GetComponentInParent<MouseLook>().mouseSensitivity = 50f;
             loadingGauge.value = 0f;
             elapsedLoadingTime = 0f;
             elapsedReloadingTime += Time.deltaTime;
@@ -185,7 +185,7 @@ public class Blaster : MonoBehaviour
     
     private void BulletTimeFade()
     {
-        if (Input.GetButton("Fire1"))
+        if (Input.GetButton("Fire1") || Input.GetAxisRaw("Fire1") >= 0.2f)
         {
             if (bulletTimeIn)
             {
@@ -194,7 +194,7 @@ public class Blaster : MonoBehaviour
                 bulletTimeIn = false;
             }
         }
-        else if (Input.GetButtonUp("Fire1"))
+        else if (Input.GetButtonUp("Fire1") || Input.GetAxisRaw("Fire1") < 0.2f)
         {
             if (!bulletTimeIn)
             {
