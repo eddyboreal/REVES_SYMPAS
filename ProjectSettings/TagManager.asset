@@ -9,6 +9,8 @@ TagManager:
   - Tile
   - FireStart
   - Camera
+  - LevelManager
+  - PlayerUI
   layers:
   - Default
   - TransparentFX

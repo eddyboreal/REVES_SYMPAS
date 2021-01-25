@@ -31,9 +31,16 @@ public class Ennemy : MonoBehaviour
 
     RaycastHit hit;
 
+    public LevelManager LevelManager = default;
+
     protected virtual void Awake()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+    }
+
+    void Start()
+    {
+                
     }
 
     protected virtual void Update()
@@ -49,6 +56,7 @@ public class Ennemy : MonoBehaviour
         health -= damage;
         if (health <= 0)
         {
+            ++GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>().nbEmennemiesKilled;
             Die(hitPosition, rayOrigin);
         }
         else
