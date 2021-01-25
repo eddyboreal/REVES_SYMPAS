@@ -2,22 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MeleeEnnemySuicideAttackBehavior : StateMachineBehaviour
+public class Stun : StateMachineBehaviour
 {
-    //OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
+    float stunDuration;
+    float stunOverlapsedTime;
+    // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        base.OnStateEnter(animator, stateInfo, layerIndex);
-        animator.GetComponent<MeleeEnnemy>().player.GetComponent<Player>().TakeDamage(animator.GetComponent<MeleeEnnemy>().damageDone);
-        animator.GetComponent<MeleeEnnemy>().Explode(animator.gameObject.transform.position, new Vector3(0, 0, 0));
-        //GameObject.Destroy(animator.gameObject);
+        stunDuration = animator.GetComponent<Ennemy>().stunDuration;
+        stunOverlapsedTime = 0;
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
-    //override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    //{
-    //    
-    //}
+    override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        stunOverlapsedTime += Time.deltaTime;
+        if(stunOverlapsedTime >= stunDuration)
+        {
+            animator.SetTrigger("stunTimeElapsed");
+        }
+    }
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     //override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

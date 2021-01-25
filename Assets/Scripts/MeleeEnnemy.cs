@@ -34,11 +34,19 @@ public class MeleeEnnemy : Ennemy
         StartCoroutine("FollowPlayer");
     }
 
+    public override void StopFollowing()
+    {
+        base.StopFollowing();
+        NavMeshAgent agent = GetComponent<NavMeshAgent>();
+        agent.destination = transform.position;
+    }
+
     IEnumerator FollowPlayer()
     {
         NavMeshAgent agent = GetComponent<NavMeshAgent>();
         while (followingPlayer)
         {
+            Debug.Log("c");
             agent.destination = player.transform.position;
             yield return new WaitForSeconds(RefreshPlayerPosition);
         }

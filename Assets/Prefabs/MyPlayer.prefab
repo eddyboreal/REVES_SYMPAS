@@ -113,8 +113,7 @@ MonoBehaviour:
   loadTime: 0.1
   reloadTime: 3
   elapsedReloadingTime: 0
-  TileFadeInDuration: 0.5
-  TileFadeOutDuration: 1.5
+  elapsedLoadingTime: 0
   loadingGauge: {fileID: 0}
   fpsCam: {fileID: 8905300546012156589}
   Helper: {fileID: 0}
@@ -123,6 +122,9 @@ MonoBehaviour:
   FireStart: {fileID: 671415331959190661}
   Bullet: {fileID: 1170744857039610, guid: 75f2b948ef198bf46b2b055c4c804999, type: 3}
   speed: 6
+  FireButtonPushed: 0
+  BulletTimeCanvas: {fileID: 0}
+  BounceText: {fileID: 0}
 --- !u!1 &8905300546012156590
 GameObject:
   m_ObjectHideFlags: 0
@@ -339,7 +341,7 @@ GameObject:
   - component: {fileID: 8905300547032331875}
   - component: {fileID: 8905300547032331874}
   m_Layer: 0
-  m_Name: Cylinder
+  m_Name: PlayerRenderer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -354,7 +356,7 @@ Transform:
   m_GameObject: {fileID: 8905300547032331903}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 8905300546908222539}
   m_RootOrder: 0
@@ -366,7 +368,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8905300547032331903}
-  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &8905300547032331874
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -385,7 +387,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: decbfb0c6ee2af448a5933fcdbf5990a, type: 2}
+  - {fileID: 2100000, guid: cc97c5e648cbf7c40ad69fb440493bd4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

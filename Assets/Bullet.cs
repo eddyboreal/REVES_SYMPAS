@@ -54,11 +54,17 @@ public class Bullet : MonoBehaviour
 
         if(EnnemyHitIndex == hitIndex && Vector3.Distance(transform.position, transforms[hitIndex]) <= 1)
         {
-            Ennemy.GetComponent<Ennemy>().TakeDamage(10 * (hitIndex + 1), transforms[hitIndex], originCamPosition);
+            EnnemyHitIndex = -1;
+            if (hitIndex == 0)
+            {
+                Ennemy.GetComponent<Ennemy>().TakeDamage(10 * (hitIndex + 1), transforms[hitIndex], originCamPosition);
+            }
+            else
+            {
+                Ennemy.GetComponent<Ennemy>().TakeDamage(10 * (hitIndex + 1), transforms[hitIndex], transforms[hitIndex - 1]);
+            }
             Destroy(gameObject);
-        }
-
-        
+        } 
     }
 
     public void SetDirection(Vector3 direction)
