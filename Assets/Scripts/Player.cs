@@ -22,8 +22,11 @@ public class Player : MonoBehaviour
     public void TakeDamage(int damage)
     {
         health -= damage;
-        if (health <= 0)
+        if (health == 0)
         {
+            gameObject.GetComponentInChildren<MouseLook>().CanMove = false;
+            gameObject.GetComponent<PlayerMovement>().CanMove = false;
+            gameObject.GetComponentInChildren<Blaster>().ResetBulletTime();
             Die();
         }
     }

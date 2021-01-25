@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.UI;
 using UnityEngine;
 
 public struct Colors
@@ -42,6 +43,12 @@ public class Helper : MonoBehaviour
         StartCoroutine(FadeColorCoroutine(meshRenderer, startColor1, endColor1, startColor2, endColor2, fadeInDuration, fadeOutDuration, tile));
     }
 
+    public void FadeColor(Text text, Color startColor1, Color endColor1, Color startColor2, Color endColor2, float fadeInDuration, float fadeOutDuration)
+    {
+        StopCoroutine(FadeColorCoroutine(text, startColor1, endColor1, startColor2, endColor2, fadeInDuration, fadeOutDuration));
+        StartCoroutine(FadeColorCoroutine(text, startColor1, endColor1, startColor2, endColor2, fadeInDuration, fadeOutDuration));
+    }
+
 
     IEnumerator FadeColorCoroutine(MeshRenderer meshRenderer, Color startColor1, Color endColor1, Color startColor2, Color endColor2, float fadeInDuration, float fadeOutDuration, bool tile)
     {
@@ -66,6 +73,24 @@ public class Helper : MonoBehaviour
         {
             meshRenderer.material = blackMaterial;
         }
+    }
 
+    IEnumerator FadeColorCoroutine(Text text, Color startColor1, Color endColor1, Color startColor2, Color endColor2, float fadeInDuration, float fadeOutDuration)
+    {
+        for (float a = 0; a <= fadeInDuration; a += Time.deltaTime)
+        {
+            text.color = Color.Lerp(startColor1, endColor1, a / fadeInDuration);
+            yield return null;
+        }
+
+        for (float b = 0; b <= fadeOutDuration; b += Time.deltaTime)
+        {
+            text.color = Color.Lerp(startColor2, endColor2, b / fadeOutDuration);
+            yield return null;
+        }
+
+        yield return null;
+
+        StartCoroutine(FadeColorCoroutine(text, startColor1, endColor1, startColor2, endColor2, fadeInDuration, fadeOutDuration));
     }
 }

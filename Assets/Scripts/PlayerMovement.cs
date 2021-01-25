@@ -19,10 +19,13 @@ public class PlayerMovement : MonoBehaviour
 
     Vector3 velocity;
 
+    public bool CanMove = true;
+    public Timer timer = default;
+
     private void Start()
     {
-        //Cursor.lockState = CursorLockMode.Locked;
-        //Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
     void Update()
     {
@@ -32,23 +35,33 @@ public class PlayerMovement : MonoBehaviour
             //force Player to the ground
             velocity.y = -2f;
         }
-        float x = Input.GetAxis("Horizontal");
-        float z = Input.GetAxis("Vertical");
+        
 
-        //target the direction where the Player wants to move (according to its transform)
-        Vector3 move = transform.right * x + transform.forward * z;
-
-        controller.Move(move * speed * Time.deltaTime);
-
-        if(Input.GetButtonDown("Jump") && is_grounded)
+        if (CanMove && timer.CanStart)
         {
-            Debug.Log("Jump");
-            velocity.y = Mathf.Sqrt(jump_height * -2f * gravity);
+            float x = Input.GetAxis("Horizontal");
+            float z = Input.GetAxis("Vertical");
+
+            //target the direction where the Player wants to move (according to its transform)
+            Vector3 move = transform.right * x + transform.forward * z;
+
+            controller.Move(move * speed * Time.deltaTime);
+
+            if (Input.GetButtonDown("Jump") && is_grounded)
+            {
+                Debug.Log("Jump");
+                velocity.y = Mathf.Sqrt(jump_height * -2f * gravity);
+            }
+
+            //simulate gravity
+            velocity.y += gravity * Time.deltaTime;
+
+            controller.Move(velocity * Time.deltaTime);
         }
-
-        //simulate gravity
-        velocity.y += gravity * Time.deltaTime;
-
-        controller.Move(velocity * Time.deltaTime);
+        else
+        {
+            velocity.y += gravity * Time.deltaTime;
+            controller.Move(velocity * Time.deltaTime);
+        }
     }
 }

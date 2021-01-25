@@ -41,21 +41,29 @@ public class Blaster : MonoBehaviour
 
     public Text BounceText = default;
 
+    public bool CanReceiveInputs = true;
+    public Timer timer = default;
+
     void Awake()
     {
-        
         lineRenderer = GetComponent<LineRenderer>();
         lineRenderer.SetWidth(0.25f, 0.25f);
 
         hits = new RaycastHit[reflections];
-
     }
 
     void Update()
     {
-        
-        LoadBlaster();
-        BulletTimeFade();
+        if (CanReceiveInputs && timer.CanStart)
+        {
+            LoadBlaster();
+            BulletTimeFade();
+        }
+        else
+        {
+            Debug.Log("HERE");
+            lineRenderer.positionCount = 0;
+        }
 
         /*Time.timeScale += (1f / 16) * Time.unscaledDeltaTime;
         Time.timeScale = Mathf.Clamp(Time.timeScale, 0f, 1f);*/
@@ -67,6 +75,7 @@ public class Blaster : MonoBehaviour
 
         if (Input.GetButtonDown("Fire1") || Input.GetAxisRaw("Fire1") >= 0.2f)
         {
+            Debug.Log(Input.GetAxisRaw("Fire1"));
             Time.timeScale = 0.1f;
             Time.fixedDeltaTime = Time.timeScale * 0.02f;
         }
@@ -238,5 +247,12 @@ public class Blaster : MonoBehaviour
         {
             canvas.gameObject.SetActive(false);
         }
+    }
+
+    public void ResetBulletTime()
+    {
+        Time.timeScale = 1f;
+        Time.fixedDeltaTime = Time.timeScale * 0.02f;
+        BulletTimeCanvas.GetComponent<CanvasGroup>().alpha = 0f;
     }
 }
