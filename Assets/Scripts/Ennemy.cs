@@ -16,6 +16,9 @@ public class Ennemy : MonoBehaviour
     public Material playerHitOrangeMat;
     public Material playerHitYellowMat;
 
+    public float KnockbackForce;
+    public float stunDuration;
+
 
     public float cubeScale;
     public float hitForce;
@@ -61,6 +64,8 @@ public class Ennemy : MonoBehaviour
         }
         else
         {
+            GetComponent<Animator>().SetTrigger("stunned");
+            knockback(hitPosition, rayOrigin);
             changeColor(health);
         }
     }
@@ -68,12 +73,16 @@ public class Ennemy : MonoBehaviour
     public virtual void Die(Vector3 hitPosition, Vector3 rayOrigin)
     {
         Explode(hitPosition, rayOrigin);
-        //Destroy(gameObject);
     }
 
     public virtual void StartFollowing()
     {
         followingPlayer = true;
+    }
+
+    public virtual void StopFollowing()
+    {
+        followingPlayer = false;
     }
 
     public bool PlayerOnSight()
@@ -89,7 +98,7 @@ public class Ennemy : MonoBehaviour
         return false;
     }
 
-    private void Explode(Vector3 hitPosition, Vector3 rayOrigin)
+    public void Explode(Vector3 hitPosition, Vector3 rayOrigin)
     {
         gameObject.GetComponent<MeshRenderer>().enabled = false;
         gameObject.GetComponent<CapsuleCollider>().enabled = false;
@@ -127,7 +136,7 @@ public class Ennemy : MonoBehaviour
 
     IEnumerator explosion()
     {
-        yield return new WaitForSeconds(0.1f * Time.timeScale);
+        yield return new WaitForSeconds(0.05f * Time.timeScale);
 
         Collider[] colliders = Physics.OverlapSphere(myHitPosition, 10);
         Material[] materials = new Material[3];
@@ -152,6 +161,7 @@ public class Ennemy : MonoBehaviour
                 }
             }
         }
+        Destroy(gameObject);
 
         
 
@@ -186,6 +196,13 @@ public class Ennemy : MonoBehaviour
                     0.5f,
                     false
                 );
+    }
+
+    void knockback(Vector3 hitPosition, Vector3 rayOrigin)
+    {
+        Vector3 Direction = (hitPosition - rayOrigin).normalized;
+        Debug.Log(Direction);
+        GetComponent<Rigidbody>().AddForce(Direction * KnockbackForce , ForceMode.Impulse);
     }
 
 }

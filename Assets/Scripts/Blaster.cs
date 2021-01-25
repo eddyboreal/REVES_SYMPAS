@@ -34,7 +34,7 @@ public class Blaster : MonoBehaviour
 
     public bool FireButtonPushed = false;
 
-    int raycastIgnoredLayers = ~( (1 << 9) | (1 << 11));        // Ignores Layer 9 and 11
+    int raycastIgnoredLayers = ~( (1 << 9) | (1 << 10) | (1 << 11));        // Ignores Layer 9 and 11
 
     public Canvas BulletTimeCanvas = default;
     private bool bulletTimeIn = true;
