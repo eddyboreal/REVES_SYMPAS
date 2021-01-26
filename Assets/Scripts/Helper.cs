@@ -52,26 +52,29 @@ public class Helper : MonoBehaviour
 
     IEnumerator FadeColorCoroutine(MeshRenderer meshRenderer, Color startColor1, Color endColor1, Color startColor2, Color endColor2, float fadeInDuration, float fadeOutDuration, bool tile)
     {
-        if (tile)
+        if(meshRenderer != null)
         {
-            meshRenderer.material = whiteMaterial;
-        }
+            if (tile)
+            {
+                meshRenderer.material = whiteMaterial;
+            }
 
-        for (float a =0; a <= fadeInDuration; a+= Time.deltaTime)
-        {
-            meshRenderer.material.color = Color.Lerp(startColor1, endColor1, a/fadeInDuration);
-            yield return null;
-        }
+            for (float a = 0; a <= fadeInDuration; a += Time.deltaTime)
+            {
+                meshRenderer.material.color = Color.Lerp(startColor1, endColor1, a / fadeInDuration);
+                yield return null;
+            }
 
-        for (float b = 0; b <= fadeOutDuration; b += Time.deltaTime)
-        {
-            meshRenderer.material.color = Color.Lerp(startColor2, endColor2, b/fadeOutDuration);
-            yield return null;
-        }
+            for (float b = 0; b <= fadeOutDuration; b += Time.deltaTime)
+            {
+                meshRenderer.material.color = Color.Lerp(startColor2, endColor2, b / fadeOutDuration);
+                yield return null;
+            }
 
-        if (tile)
-        {
-            meshRenderer.material = blackMaterial;
+            if (tile)
+            {
+                meshRenderer.material = blackMaterial;
+            }
         }
     }
 

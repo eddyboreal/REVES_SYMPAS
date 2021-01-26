@@ -25,7 +25,7 @@ public class LevelManager : MonoBehaviour
 
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        player = GameObject.FindGameObjectWithTag("Player2").GetComponent<Player>();
         PlayerUI = GameObject.FindGameObjectWithTag("PlayerUI");
         helper = GameObject.FindGameObjectWithTag("Helper").GetComponent<Helper>();
 

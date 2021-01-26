@@ -74,7 +74,6 @@ public class Blaster : MonoBehaviour
 
         if (Input.GetButtonDown("Fire1") || Input.GetAxisRaw("Fire1") >= 0.2f)
         {
-            Debug.Log(Input.GetAxisRaw("Fire1"));
             Time.timeScale = 0.1f;
             Time.fixedDeltaTime = Time.timeScale * 0.02f;
         }

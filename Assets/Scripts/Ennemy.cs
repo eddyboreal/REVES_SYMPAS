@@ -38,7 +38,7 @@ public class Ennemy : MonoBehaviour
 
     protected virtual void Awake()
     {
-        player = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.FindGameObjectWithTag("Player2");
     }
 
     void Start()

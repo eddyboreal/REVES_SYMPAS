@@ -11,6 +11,8 @@ TagManager:
   - Camera
   - LevelManager
   - PlayerUI
+  - Player
+  - Player2
   layers:
   - Default
   - TransparentFX
