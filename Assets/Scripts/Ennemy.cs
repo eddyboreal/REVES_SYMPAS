@@ -90,7 +90,7 @@ public class Ennemy : MonoBehaviour
         Debug.DrawRay(transform.position, GetComponent<Ennemy>().player.transform.position - transform.position);
         if (Physics.Raycast(transform.position, player.transform.position - transform.position, out hit))
         {
-            if (hit.collider.gameObject.CompareTag("Player"))
+            if (hit.collider.gameObject.CompareTag("Player2"))
             {
                 return true;
             }   
