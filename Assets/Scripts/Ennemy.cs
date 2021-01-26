@@ -59,7 +59,7 @@ public class Ennemy : MonoBehaviour
         health -= damage;
         if (health <= 0)
         {
-            ++GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>().nbEmennemiesKilled;
+            ++GameObject.FindGameObjectWithTag("LevelManager").GetComponent<LevelManager>().nbEnnemiesKilled;
             Die(hitPosition, rayOrigin);
         }
         else

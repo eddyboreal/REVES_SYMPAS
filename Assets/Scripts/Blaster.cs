@@ -61,7 +61,6 @@ public class Blaster : MonoBehaviour
         }
         else
         {
-            Debug.Log("HERE");
             lineRenderer.positionCount = 0;
         }
 

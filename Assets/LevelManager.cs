@@ -7,7 +7,7 @@ using UnityEngine;
 public class LevelManager : MonoBehaviour
 {
     public Canvas LevelScore = default;
-    public int nbEmennemiesKilled = 0;
+    public int nbEnnemiesKilled = 0;
 
     public int TotalEnnemies = default;
     public Canvas ScoreCanvas = default;
@@ -34,7 +34,7 @@ public class LevelManager : MonoBehaviour
 
     void Update() 
     {
-        if (nbEmennemiesKilled == TotalEnnemies && !canvasDisplayed) 
+        if (nbEnnemiesKilled == TotalEnnemies && !canvasDisplayed) 
         {
             levelOver = true;
 
